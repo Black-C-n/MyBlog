@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/fragments :: head(${title})}"></head>
+<body class="change-form"><div id="container"><div th:replace="~{admin/fragments :: header}"></div><div th:replace="~{admin/fragments :: breadcrumbs('博文管理')}"></div><div th:replace="~{admin/fragments :: navigation}"></div>
+<main class="content"><div id="content"><h1 th:text="${title}">博文管理</h1><div id="content-main"><form method="post" enctype="multipart/form-data"><div><fieldset class="module aligned wide">
+<div class="form-row required"><div><label for="title">标题:</label><input id="title" name="title" class="vTextField" maxlength="200" required th:value="${item.title}"></div></div>
+<div class="form-row required"><div><label for="content">内容:</label><textarea id="content" name="content" rows="20" cols="80" th:text="${item.content}"></textarea></div></div>
+<div class="form-row"><div><label for="articlePhotoFile">文章图片:</label><a th:if="${item.articlePhoto != null and !item.articlePhoto.isBlank()}" th:href="@{/media/{path}(path=${item.articlePhoto})}" th:text="${item.articlePhoto}"></a><br><input id="articlePhotoFile" name="articlePhotoFile" type="file" accept="image/*"></div></div>
+<div class="form-row"><div><label for="reading">阅读量:</label><input id="reading" name="reading" type="number" min="0" th:value="${item.reading}"></div></div>
+<div class="form-row"><div><label for="liking">点赞量:</label><input id="liking" name="liking" type="number" min="0" th:value="${item.liking}"></div></div>
+<div class="form-row"><div><label for="tagIds">文章标签:</label><select id="tagIds" name="tagIds" multiple size="6"><option th:each="tag : ${allTags}" th:value="${tag.id}" th:text="${tag.tag}" th:selected="${#lists.contains(selectedTagIds, tag.id)}"></option></select><div class="help">按住 Ctrl 可以选择多个标签。</div></div></div>
+</fieldset><div class="submit-row"><input type="submit" value="保存" class="default" name="_save"></div></div></form></div></div></main></div>
+<script src="/ckeditor/ckeditor/ckeditor.js"></script>
+<script>if (window.CKEDITOR) { CKEDITOR.replace('content', {height: 360, filebrowserUploadUrl: '/ckeditor/upload/'}); }</script>
+</body></html>

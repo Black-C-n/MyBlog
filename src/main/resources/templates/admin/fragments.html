@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(titleText)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titleText} + ' | 博客管理后台'">博客管理后台</title>
+    <link rel="stylesheet" href="/admin/css/base.css">
+    <link rel="stylesheet" href="/admin/css/responsive.css">
+    <link rel="stylesheet" href="/admin/css/dashboard.css">
+    <link rel="stylesheet" href="/admin/css/changelists.css">
+    <link rel="stylesheet" href="/admin/css/forms.css">
+    <link rel="stylesheet" href="/admin/css/myblog-admin.css">
+</head>
+<body>
+<div th:fragment="header" id="header">
+    <div id="branding"><h1 id="site-name"><a href="/admin/">博客管理</a></h1></div>
+    <div id="user-tools">
+        欢迎，<strong th:text="${loginUser.username}">用户</strong>。
+        <a th:href="@{/{id}/1.html(id=${loginUser.id})}">查看站点</a> /
+        <a href="/user/about/1.html" th:href="@{/user/about/{id}.html(id=${loginUser.id})}">个人资料</a> /
+        <a href="/admin/logout/">注销</a>
+    </div>
+</div>
+
+<div th:fragment="breadcrumbs(current)" class="breadcrumbs">
+    <a href="/admin/">首页</a>
+    <span th:if="${appName != '首页'}"> › <span th:text="${appName}">管理</span></span>
+    <span th:if="${current != null and !current.isBlank()}"> › <span th:text="${current}">当前页</span></span>
+</div>
+
+<nav th:fragment="navigation" class="admin-navigation">
+    <a href="/admin/account/myuser/">用户</a>
+    <a href="/admin/article/articleinfo/">博文</a>
+    <a href="/admin/article/articletag/">分类</a>
+    <a href="/admin/article/comment/">评论</a>
+    <a href="/admin/album/albuminfo/">图片墙</a>
+    <a href="/admin/interflow/board/">留言</a>
+</nav>
+</body>
+</html>

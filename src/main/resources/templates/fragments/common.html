@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(titleText)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titleText}">我的博客</title>
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/m.css" rel="stylesheet">
+    <link href="/css/info.css" rel="stylesheet">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/comm.js"></script>
+    <script src="/js/modernizr.js"></script>
+    <script src="/js/scrollReveal.js"></script>
+</head>
+<body>
+<header th:fragment="header(userId)" class="header-navigation" id="header">
+    <nav>
+        <div class="logo"><a th:href="@{/{id}/1.html(id=${userId})}">博客首页</a></div>
+        <h2 id="mnavh"><span class="navicon"></span></h2>
+        <ul id="starlist">
+            <li><a th:href="@{/{id}/1.html(id=${userId})}">我的日记</a></li>
+            <li><a th:href="@{/album/{id}/1.html(id=${userId})}">我的相册</a></li>
+            <li><a th:href="@{/user/about/{id}.html(id=${userId})}">关于我</a></li>
+            <li><a th:href="@{/board/{id}/1.html(id=${userId})}">留言</a></li>
+            <li><a href="/admin/">博客后台管理</a></li>
+        </ul>
+    </nav>
+</header>
+
+<aside th:fragment="sidebar(user, albums, articleTags)" class="l_box">
+    <div class="about_me">
+        <h2>关于我</h2>
+        <ul>
+            <i>
+                <img th:if="${user.photo != null and !user.photo.isBlank()}"
+                     th:src="@{/media/{path}(path=${user.photo})}" alt="头像">
+                <img th:unless="${user.photo != null and !user.photo.isBlank()}"
+                     src="/images/user.jpg" alt="默认头像">
+            </i>
+            <p><b th:text="${user.name}">匿名用户</b>，<span th:text="${user.introduce}">暂无介绍</span></p>
+        </ul>
+    </div>
+    <div class="wdxc">
+        <h2>我的相册</h2>
+        <ul>
+            <li th:each="item : ${albums}">
+                <a href="javascript:;"><img th:src="@{/media/{path}(path=${item.photo})}" alt="相册图片"></a>
+            </li>
+            <li th:if="${#lists.isEmpty(albums)}">暂无相册图片</li>
+        </ul>
+    </div>
+    <div class="fenlei">
+        <h2>文章分类</h2>
+        <ul>
+            <li th:each="item : ${articleTags}" th:text="${item.tag}">分类</li>
+            <li th:if="${#lists.isEmpty(articleTags)}">暂无分类</li>
+        </ul>
+    </div>
+    <div class="tuijian">
+        <h2>站长推荐</h2>
+        <ul>
+            <li><a href="https://gitbook.cn/gitchat/author/5b28bff00ac95342c847f199" target="new">个人专题</a></li>
+            <li><a href="https://item.jd.com/12460562.html" target="new">玩转django2.0-京东</a></li>
+            <li><a href="http://product.dangdang.com/25535043.html" target="new">玩转django2.0-当当网</a></li>
+        </ul>
+    </div>
+    <div class="links">
+        <h2>友情链接</h2>
+        <ul>
+            <a href="https://blog.csdn.net/HuangZhang_123" target="new">CSDN博客</a>
+            <a href="https://book.jd.com/writer/%E9%BB%84%E6%B0%B8%E7%A5%A5_1.html" target="new">出版图书</a>
+        </ul>
+    </div>
+</aside>
+</body>
+</html>

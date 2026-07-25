@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: head('我的相册')}"></head>
+<body>
+<header th:replace="~{fragments/common :: header(${id})}"></header>
+<article>
+    <div class="picbox">
+        <div th:each="item : ${pageInfo.content}" class="picvalue"
+             data-scroll-reveal="enter bottom over 1s">
+            <a href="javascript:;">
+                <i><img th:src="@{/media/{path}(path=${item.photo})}" alt="相册图片"></i>
+                <div class="picinfo">
+                    <h3 th:text="${item.title != null and !item.title.isBlank() ? item.title : '相册图片'}">相册图片</h3>
+                    <span th:text="${item.introduce != null and !item.introduce.isBlank() ? item.introduce : '图片简介'}">图片简介</span>
+                </div>
+            </a>
+        </div>
+        <div th:if="${pageInfo.empty}" style="text-align:center;padding:50px">暂无相册图片</div>
+    </div>
+    <div class="pagelist" th:if="${pageInfo.totalPages > 0}">
+        <a th:if="${pageInfo.hasPrevious()}"
+           th:href="@{/album/{id}/{page}.html(id=${id},page=${pageInfo.number})}">上一页</a>
+        <th:block th:each="pageNumber : ${#numbers.sequence(1, pageInfo.totalPages)}">
+            <a th:if="${pageNumber == pageInfo.number + 1}" href="javascript:;"
+               class="curPage" th:text="${pageNumber}">1</a>
+            <a th:unless="${pageNumber == pageInfo.number + 1}"
+               th:href="@{/album/{id}/{page}.html(id=${id},page=${pageNumber})}"
+               th:text="${pageNumber}">1</a>
+        </th:block>
+        <a th:if="${pageInfo.hasNext()}"
+           th:href="@{/album/{id}/{page}.html(id=${id},page=${pageInfo.number + 2})}">下一页</a>
+    </div>
+</article>
+<a href="#" class="cd-top">Top</a>
+<script>
+    if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
+        (function () { window.scrollReveal = new scrollReveal({reset: true}); })();
+    }
+</script>
+</body>
+</html>

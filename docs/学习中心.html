@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="myblog Spring Boot 项目的初学者离线学习中心，从启动、MVC、JPA 到后台 CRUD 与测试逐步讲解。">
+    <title>myblog Spring Boot 学习中心</title>
+    <link rel="stylesheet" href="learning-assets/learning.css">
+    <script defer src="learning-assets/learning.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳到正文</a>
+
+<header class="topbar">
+    <div class="topbar-inner">
+        <button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开章节目录" aria-controls="course-sidebar" aria-expanded="false">☰</button>
+        <a class="brand" href="#top" aria-label="返回学习中心顶部">
+            <span class="brand-mark">MB</span>
+            <span class="brand-text">myblog 学习中心<small>Spring Boot · JDK 17</small></span>
+        </a>
+        <label class="toolbar-search" for="course-search">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="course-search" type="search" placeholder="搜索：登录、JPA、图片、事务……" autocomplete="off">
+            <span class="shortcut">按 /</span>
+        </label>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="切换深浅主题">☾</button>
+    </div>
+</header>
+
+<main id="main-content">
+    <section class="hero" id="top">
+        <div class="hero-inner">
+            <div>
+                <span class="eyebrow">从零开始 · 对照真实源码</span>
+                <h1>真正读懂你的 <span>Spring Boot 博客</span></h1>
+                <p class="hero-lead">这不是一份只列名词的说明书。它会把一次浏览器请求拆成小步骤，告诉你每一层为什么存在、数据怎么走、在 IDEA 哪里打断点，以及面试时怎样把它讲清楚。</p>
+                <div class="hero-actions">
+                    <a class="primary-button" href="#start">从第 0 章开始</a>
+                    <a class="soft-button" href="#run">先把项目跑起来</a>
+                    <button class="soft-button" id="print-course" type="button">打印 / 保存 PDF</button>
+                </div>
+            </div>
+            <aside class="hero-card" aria-label="学习进度">
+                <h2>你的学习进度</h2>
+                <p>每章读完后点“标记学完”，进度只保存在当前浏览器。</p>
+                <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+                <div class="progress-row">
+                    <strong class="progress-value" id="progress-value">0%</strong>
+                    <span class="progress-meta" id="progress-meta">已完成 0 章</span>
+                </div>
+                <div class="progress-actions">
+                    <button id="mark-all" type="button">全部完成</button>
+                    <button id="reset-progress" type="button">清空进度</button>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <section class="stat-strip" aria-label="课程概况">
+        <div class="stat"><strong>29 章</strong><span>从运行到面试表达</span></div>
+        <div class="stat"><strong>5 层</strong><span>页面到数据库完整链路</span></div>
+        <div class="stat"><strong>6 实体</strong><span>真实 JPA 数据关系</span></div>
+        <div class="stat"><strong>7 测试</strong><span>密码与图片回归保护</span></div>
+    </section>
+
+    <div class="page-grid">
+        <aside class="sidebar" id="course-sidebar" aria-label="课程章节">
+            <p class="sidebar-title">学习目录</p>
+            <nav class="toc">
+                <a href="#start"><span>0</span>怎样使用这份教程</a>
+                <a href="#overview"><span>1</span>先看懂项目全貌</a>
+                <a href="#run"><span>2</span>在 IDEA 中运行</a>
+                <a href="#structure"><span>3</span>目录与文件地图</a>
+                <a href="#maven"><span>4</span>Maven 与依赖</a>
+                <a href="#boot"><span>5</span>Spring Boot 启动</a>
+                <a href="#mvc"><span>6</span>MVC 五层结构</a>
+                <a href="#first-request"><span>7</span>追踪第一个请求</a>
+                <a href="#login"><span>8</span>登录完整流程</a>
+                <a href="#register"><span>9</span>注册与表单校验</a>
+                <a href="#routes"><span>10</span>路由与 HTTP</a>
+                <a href="#pagination"><span>11</span>文章列表与分页</a>
+                <a href="#detail"><span>12</span>详情与阅读量</a>
+                <a href="#comment"><span>13</span>评论与 PRG</a>
+                <a href="#entity"><span>14</span>Entity 与表关系</a>
+                <a href="#repository"><span>15</span>Repository 查询</a>
+                <a href="#thymeleaf"><span>16</span>Thymeleaf 页面</a>
+                <a href="#session"><span>17</span>Session 与拦截器</a>
+                <a href="#admin"><span>18</span>后台 CRUD</a>
+                <a href="#upload"><span>19</span>图片上传与显示</a>
+                <a href="#password"><span>20</span>密码哈希兼容</a>
+                <a href="#test"><span>21</span>自动化测试</a>
+                <a href="#debug"><span>22</span>IDEA 断点调试</a>
+                <a href="#errors"><span>23</span>常见错误排查</a>
+                <a href="#interview"><span>24</span>面试问答</a>
+                <a href="#roadmap"><span>25</span>14 天学习路线</a>
+                <a href="#exercises"><span>26</span>动手练习</a>
+                <a href="#glossary"><span>27</span>术语词典</a>
+                <a href="#pitch"><span>28</span>项目讲解稿</a>
+            </nav>
+            <p class="sidebar-tip">提示：按 <strong>/</strong> 聚焦搜索框，按 <strong>Esc</strong> 清空搜索。页面完全离线，不会向网络发送内容。</p>
+        </aside>
+        <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+        <div class="content">
+            <div class="search-summary" id="search-summary" role="status" aria-live="polite"></div>
+            <div class="empty-state" id="empty-state"><strong>没有找到相关章节</strong><br>可以试试“登录”“图片”“JPA”或“测试”。</div>
+
+            <article class="lesson" id="start" data-lesson="start" data-keywords="学习方法 新手 阅读顺序">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 0 章</span><h2>怎样使用这份教程</h2><p class="lesson-subtitle">先建立正确的学习方式，不要求第一遍就记住全部代码。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <div class="lead-box"><strong>本教程只讲当前这一个项目。</strong>你看到的类名、URL、数据库表、文件路径都来自 <code>myblog-Java</code>，可以一边阅读一边在 IDEA 中打开对应源码。</div>
+
+                <h3>推荐的三遍学习法</h3>
+                <ol class="step-list">
+                    <li><strong>第一遍：只看流程</strong>知道浏览器请求会经过 Controller、Service、Repository，最后到数据库即可。看不懂注解不要停太久。</li>
+                    <li><strong>第二遍：跟着断点走</strong>按照第 22 章设置断点，亲眼看变量从哪里来、变成什么值、最后返回哪个页面。</li>
+                    <li><strong>第三遍：自己改一个小功能</strong>从改文字、增加字段校验开始，再尝试 Repository 查询和后台页面。能改出来才算真正掌握。</li>
+                </ol>
+
+                <div class="callout remember"><span class="callout-icon">★</span><div class="callout-content"><strong>先记住一句话</strong><p>不要背整段代码。先回答三个问题：<strong>请求从哪里来？数据在哪里处理？结果送到哪里？</strong></p></div></div>
+
+                <h3>每学一章做这四件事</h3>
+                <ul class="checklist">
+                    <li>在 IDEA 中点击教程给出的源码链接或按路径找到文件。</li>
+                    <li>把代码中的类名、方法名和页面 URL 对应起来。</li>
+                    <li>用自己的话复述，不照着教程念。</li>
+                    <li>点击本章右上角“标记学完”，以后复习时重点看未完成章节。</li>
+                </ul>
+
+                <h3>课程前置知识</h3>
+                <p>只需要知道 Java 类、方法、变量、<code>if</code>、集合这些基础语法。遇到没见过的注解（以 <code>@</code> 开头）时，把它理解成“给 Spring 的说明标签”即可，后面会逐个解释。</p>
+                <div class="quiz"><strong>本章自测</strong>不看上面的文字回答：一次请求要追踪哪三个问题？<details><summary>查看答案</summary><p>请求从哪里来；数据在哪里处理；结果送到哪里。</p></details></div>
+            </article>
+
+            <article class="lesson" id="overview" data-lesson="overview" data-keywords="项目全貌 博客 功能 前台 后台 架构">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 1 章</span><h2>先看懂项目全貌</h2><p class="lesson-subtitle">它是一个服务端渲染的个人博客，不是前后端分离项目。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <h3>这个项目解决什么问题？</h3>
+                <p>用户可以注册和登录，浏览个人博客的文章、文章详情、评论、相册、留言板和个人资料；登录后的管理员可以在自建后台维护自己的文章、分类、评论、图片和留言。数据保存在 MySQL，页面由 Thymeleaf 在服务器上生成。</p>
+
+                <div class="cards three">
+                    <div class="mini-card"><span class="badge">公开页面</span><h4>浏览博客</h4><p>文章、详情、相册、留言和关于页面，任何访问者都能看。</p></div>
+                    <div class="mini-card"><span class="badge">账户功能</span><h4>注册登录</h4><p>使用 Session 保存登录状态，并兼容原 Django 账号密码。</p></div>
+                    <div class="mini-card"><span class="badge">管理后台</span><h4>维护内容</h4><p>基础 Spring MVC 自建 CRUD，没有引入 Spring Security 等较重框架。</p></div>
+                </div>
+
+                <h3>一次请求的完整旅行</h3>
+                <div class="flow" aria-label="请求流程">
+                    <div class="flow-step"><strong>1 浏览器</strong><small>访问 URL / 提交表单</small></div><div class="flow-arrow">→</div>
+                    <div class="flow-step"><strong>2 Controller</strong><small>接收参数，选择业务</small></div><div class="flow-arrow">→</div>
+                    <div class="flow-step"><strong>3 Service</strong><small>处理业务规则</small></div><div class="flow-arrow">→</div>
+                    <div class="flow-step"><strong>4 Repository</strong><small>查询或保存数据</small></div><div class="flow-arrow">→</div>
+                    <div class="flow-step"><strong>5 MySQL</strong><small>真正保存数据</small></div><div class="flow-arrow">→</div>
+                    <div class="flow-step"><strong>6 Thymeleaf</strong><small>生成 HTML 返回</small></div>
+                </div>
+
+                <div class="callout remember"><span class="callout-icon">★</span><div class="callout-content"><strong>服务端渲染是什么意思？</strong><p>浏览器收到的已经是完整 HTML。Java 在服务器上把数据库数据填进模板，不需要 Vue/React 再调用一套 JSON 接口。</p></div></div>
+
+                <h3>技术栈为什么适合初学者</h3>
+                <div class="table-wrap"><table><thead><tr><th>技术</th><th>在项目中的任务</th><th>暂时不用掌握什么</th></tr></thead><tbody>
+                    <tr><td>Spring Boot 4.1.0</td><td>启动、自动配置、管理组件</td><td>微服务、云原生</td></tr>
+                    <tr><td>Spring MVC</td><td>URL、参数、表单、页面返回</td><td>WebFlux、响应式编程</td></tr>
+                    <tr><td>Thymeleaf</td><td>把 Java 数据填入 HTML</td><td>前后端分离框架</td></tr>
+                    <tr><td>Spring Data JPA</td><td>用 Java 对象操作数据库表</td><td>QueryDSL、复杂动态查询</td></tr>
+                    <tr><td>MySQL</td><td>保存用户、文章、评论等数据</td><td>分库分表、集群</td></tr>
+                    <tr><td>H2</td><td>只在自动化测试中充当临时数据库</td><td>生产环境部署</td></tr>
+                </tbody></table></div>
+                <div class="quiz"><strong>本章自测</strong>本项目是前后端分离吗？页面 HTML 在哪里生成？<details><summary>查看答案</summary><p>不是前后端分离；HTML 由服务器上的 Thymeleaf 模板生成后返回浏览器。</p></details></div>
+            </article>
+
+            <article class="lesson" id="run" data-lesson="run" data-keywords="IDEA 运行 JDK17 MySQL root 8080 Maven 启动">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 2 章</span><h2>在 IDEA 中第一次运行</h2><p class="lesson-subtitle">先得到一个能访问的页面，再开始读代码。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <div class="callout warn"><span class="callout-icon">!</span><div class="callout-content"><strong>打开正确的目录</strong><p>在 IDEA 选择包含 <code>pom.xml</code> 的内层目录：<code>myblog-Java/myblog-Java</code>，不要只打开外层文件夹。</p></div></div>
+
+                <h3>运行前检查</h3>
+                <ol class="step-list">
+                    <li><strong>选择 JDK 17</strong>在 IDEA 的 File → Project Structure → Project SDK 中选择 JDK 17；Maven Runner 的 JRE 也选择同一个 JDK。</li>
+                    <li><strong>确认 MySQL 已启动</strong>端口默认是 <code>3306</code>，数据库名为 <code>blogdb</code>，本机默认账号和密码都是 <code>root</code>。</li>
+                    <li><strong>首次没有数据库时导入</strong>先执行 <a class="path-link" href="../database/create_database.sql">database/create_database.sql</a>，再导入 <a class="path-link" href="../database/blogdb.sql">database/blogdb.sql</a>。已有数据不要重复导入。</li>
+                    <li><strong>等待 Maven 下载依赖</strong>IDEA 右下角索引和下载结束后，打开主类，点击绿色三角运行。</li>
+                </ol>
+
+                <p>主类在 <a class="path-link" href="../src/main/java/com/example/myblog/MyBlogApplication.java">MyBlogApplication.java</a>。控制台看到类似 <code>Started MyBlogApplication</code> 后，浏览器访问 <code>http://localhost:8080/</code>。</p>
+
+                <div class="code-block"><div class="code-title"><span>命令行备用启动方式（Windows）</span><button class="copy-button" type="button">复制</button></div><pre><code>.\mvnw.cmd spring-boot:run</code></pre></div>
+
+                <h3>配置文件逐项认识</h3>
+                <p>打开 <a class="path-link" href="../src/main/resources/application.properties">application.properties</a>：</p>
+                <div class="code-block"><div class="code-title"><span>application.properties（核心配置）</span><button class="copy-button" type="button">复制</button></div><pre><code>server.port=8080
+spring.datasource.url=jdbc:mysql://localhost:3306/blogdb?...
+spring.datasource.username=${DB_USERNAME:root}
+spring.datasource.password=${DB_PASSWORD:root}
+spring.jpa.hibernate.ddl-auto=none
+spring.thymeleaf.cache=false
+app.upload-dir=${MYBLOG_UPLOAD_DIR:${user.dir}/storage/media}</code></pre></div>
+                <ul class="code-explain">
+                    <li><code>${DB_USERNAME:root}</code> 表示：有环境变量就用环境变量，没有就用冒号后的 <code>root</code>。</li>
+                    <li><code>ddl-auto=none</code> 表示 Hibernate 不替你建表或改表，避免破坏从 Django 保留下来的结构和数据。</li>
+                    <li><code>cache=false</code> 方便开发时修改模板后刷新立即生效。</li>
+                    <li><code>${user.dir}</code> 是运行工作目录；在 IDEA 中应把工作目录设为包含 <code>pom.xml</code> 的项目根目录。</li>
+                </ul>
+
+                <div class="callout danger"><span class="callout-icon">×</span><div class="callout-content"><strong>真实项目不要提交生产密码</strong><p>这里保留 <code>root/root</code> 是为了本地课程运行方便。求职讲解时要主动说明：生产环境应使用权限受限的独立账号，并通过环境变量注入密码。</p></div></div>
+
+                <h3>运行成功的判断标准</h3>
+                <ul class="checklist"><li>浏览器访问根路径后跳到登录页面。</li><li>登录页背景图片能够显示。</li><li>控制台没有数据库连接异常。</li><li>访问文章页面时中文不乱码。</li></ul>
+            </article>
+
+            <article class="lesson" id="structure" data-lesson="structure" data-keywords="目录 项目结构 package resources static templates docs database">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 3 章</span><h2>目录与文件地图</h2><p class="lesson-subtitle">先知道“东西放在哪”，再研究“代码怎么写”。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <div class="file-tree"><span class="folder">myblog-Java/</span>
+├─ pom.xml                         <span class="note"># Maven 项目说明与依赖</span>
+├─ mvnw.cmd                       <span class="note"># Windows Maven Wrapper</span>
+├─ <span class="folder">database/</span>                      <span class="note"># 建库和完整数据脚本</span>
+├─ <span class="folder">docs/</span>                          <span class="note"># 文档与当前学习网页</span>
+├─ <span class="folder">storage/media/</span>                 <span class="note"># 运行后新上传的图片</span>
+└─ <span class="folder">src/</span>
+   ├─ <span class="folder">main/java/com/example/myblog/</span>
+   │  ├─ config/                  <span class="note"># MVC 配置、拦截器</span>
+   │  ├─ controller/              <span class="note"># 接收浏览器请求</span>
+   │  ├─ service/                 <span class="note"># 业务规则</span>
+   │  ├─ repository/              <span class="note"># 数据库访问</span>
+   │  ├─ entity/                  <span class="note"># 数据库表对应对象</span>
+   │  ├─ form/                    <span class="note"># 接收和校验表单</span>
+   │  └─ util/                    <span class="note"># 密码工具</span>
+   ├─ <span class="folder">main/resources/</span>
+   │  ├─ templates/               <span class="note"># Thymeleaf HTML 模板</span>
+   │  ├─ static/                  <span class="note"># CSS、JS、内置图片</span>
+   │  └─ application.properties  <span class="note"># 应用配置</span>
+   └─ <span class="folder">test/</span>                         <span class="note"># 自动化测试</span></div>
+
+                <h3><code>main</code> 和 <code>test</code> 为什么分开？</h3>
+                <p><code>src/main</code> 会进入最终程序；<code>src/test</code> 只用于验证。H2 测试配置不会打进生产业务流程，也不会修改真实 MySQL。</p>
+                <h3><code>templates</code> 和 <code>static</code> 的区别</h3>
+                <div class="table-wrap"><table><thead><tr><th>目录</th><th>是否经过 Thymeleaf</th><th>访问方式</th><th>例子</th></tr></thead><tbody>
+                    <tr><td><code>templates</code></td><td>是</td><td>Controller 返回模板名</td><td><code>return "article";</code></td></tr>
+                    <tr><td><code>static</code></td><td>否</td><td>浏览器直接按 URL 请求</td><td><code>/css/main.css</code></td></tr>
+                </tbody></table></div>
+                <div class="callout tip"><span class="callout-icon">i</span><div class="callout-content"><strong>target 为什么不见了？</strong><p><code>target</code> 是 Maven 编译时自动生成的目录，清理工作区时已经安全删除。下次运行或测试会自动重建，不属于需要手写和学习的源码。</p></div></div>
+            </article>
+
+            <article class="lesson" id="maven" data-lesson="maven" data-keywords="Maven pom dependency starter parent jar">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 4 章</span><h2>Maven 与依赖：项目需要哪些工具</h2><p class="lesson-subtitle"><code>pom.xml</code> 就像 Java 项目的材料清单和构建说明。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <p>打开 <a class="path-link" href="../pom.xml">pom.xml</a>。Maven 会读取它，从仓库下载 jar 包、编译源码、运行测试并打包应用。你不需要手工把每个 jar 复制进项目。</p>
+
+                <div class="code-block"><div class="code-title"><span>pom.xml（理解结构的简化片段）</span><button class="copy-button" type="button">复制</button></div><pre><code>&lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;4.1.0&lt;/version&gt;
+&lt;/parent&gt;
+
+&lt;properties&gt;
+    &lt;java.version&gt;17&lt;/java.version&gt;
+&lt;/properties&gt;</code></pre></div>
+                <p><strong>parent</strong> 帮你统一依赖版本和 Maven 插件配置；<strong>java.version</strong> 指定编译目标为 Java 17。</p>
+
+                <div class="table-wrap"><table><thead><tr><th>依赖</th><th>提供能力</th><th>项目中的例子</th></tr></thead><tbody>
+                    <tr><td><code>spring-boot-starter-webmvc</code></td><td>内置 Web 服务器、Spring MVC</td><td><code>@GetMapping</code>、Controller</td></tr>
+                    <tr><td><code>spring-boot-starter-thymeleaf</code></td><td>HTML 模板渲染</td><td><code>th:text</code>、<code>th:each</code></td></tr>
+                    <tr><td><code>spring-boot-starter-data-jpa</code></td><td>JPA、Hibernate、Repository</td><td><code>JpaRepository</code></td></tr>
+                    <tr><td><code>spring-boot-starter-validation</code></td><td>表单参数校验</td><td><code>@NotBlank</code>、<code>@Email</code></td></tr>
+                    <tr><td><code>mysql-connector-j</code></td><td>让 Java 连接 MySQL</td><td>运行时读取 <code>blogdb</code></td></tr>
+                    <tr><td><code>h2</code>（test）</td><td>测试时临时数据库</td><td>上下文测试，不碰真实数据</td></tr>
+                </tbody></table></div>
+
+                <h3>Starter 是什么？</h3>
+                <p>Starter 不是一个神秘框架，而是一组搭配好的依赖。例如 Web MVC Starter 会一起带来 Spring MVC、JSON 支持和内置 Tomcat。这样你不用逐个研究兼容版本。</p>
+                <div class="code-block"><div class="code-title"><span>三个最常用的 Maven 命令</span><button class="copy-button" type="button">复制</button></div><pre><code>.\mvnw.cmd test
+.\mvnw.cmd spring-boot:run
+.\mvnw.cmd -DskipTests package</code></pre></div>
+                <ul class="code-explain"><li>运行全部测试。</li><li>开发时启动应用。</li><li>跳过测试直接打包；正常交付更推荐先测试再打包。</li></ul>
+            </article>
+
+            <article class="lesson" id="boot" data-lesson="boot" data-keywords="SpringBootApplication main run component scan 自动配置 Bean IOC">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 5 章</span><h2>Spring Boot 是怎样启动的</h2><p class="lesson-subtitle">从 <code>main</code> 方法到可以接收 HTTP 请求。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <p>入口文件是 <a class="path-link" href="../src/main/java/com/example/myblog/MyBlogApplication.java">MyBlogApplication.java</a>：</p>
+                <div class="code-block"><div class="code-title"><span>MyBlogApplication.java</span><button class="copy-button" type="button">复制</button></div><pre><code>@SpringBootApplication
+public class MyBlogApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MyBlogApplication.class, args);
+    }
+}</code></pre></div>
+
+                <h3><code>@SpringBootApplication</code> 做了三件大事</h3>
+                <div class="cards three">
+                    <div class="mini-card"><span class="badge">配置</span><h4>声明配置类</h4><p>告诉 Spring：可以从这个类开始建立应用上下文。</p></div>
+                    <div class="mini-card"><span class="badge">自动配置</span><h4>按依赖猜配置</h4><p>看到 MVC、JPA、Thymeleaf 依赖后准备相应组件。</p></div>
+                    <div class="mini-card"><span class="badge">组件扫描</span><h4>寻找 Bean</h4><p>扫描当前包及子包中的 Controller、Service 等。</p></div>
+                </div>
+
+                <h3>Bean 和 IoC 用大白话解释</h3>
+                <p><strong>Bean</strong> 是交给 Spring 创建和管理的 Java 对象。<strong>IoC（控制反转）</strong> 是把“谁来 new 对象”的控制权从业务代码交给 Spring。Controller 不自己 <code>new UserService()</code>，而是通过构造器声明“我需要它”，Spring 再传进来。</p>
+                <div class="code-block"><div class="code-title"><span>构造器注入的概念示例</span><button class="copy-button" type="button">复制</button></div><pre><code>@Controller
+public class AccountController {
+    private final UserService userService;
+
+    public AccountController(UserService userService) {
+        this.userService = userService;
+    }
+}</code></pre></div>
+                <div class="callout remember"><span class="callout-icon">★</span><div class="callout-content"><strong>为什么不自己 new？</strong><p>Spring 统一管理对象后，能够处理依赖关系、事务代理和测试替换；构造器还清楚表达了这个类必须依赖什么。</p></div></div>
+                <h3>启动的简化时间线</h3>
+                <div class="timeline"><div class="timeline-item"><strong>1. JVM 执行 main</strong>Java 程序有了入口。</div><div class="timeline-item"><strong>2. 创建 ApplicationContext</strong>它像保存所有 Bean 的大容器。</div><div class="timeline-item"><strong>3. 扫描并创建组件</strong>Controller、Service、Repository 被注册并连接。</div><div class="timeline-item"><strong>4. 配置数据库和模板引擎</strong>读取 properties，建立连接池和 JPA。</div><div class="timeline-item"><strong>5. 启动内置 Web 服务器</strong>监听 8080，等待浏览器请求。</div></div>
+            </article>
+
+            <article class="lesson" id="mvc" data-lesson="mvc" data-keywords="MVC Controller Service Repository Entity View 分层 单一职责">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 6 章</span><h2>MVC 与五层结构</h2><p class="lesson-subtitle">分层不是为了文件多，而是让每一类代码只负责一件事。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <div class="layer-stack">
+                    <div class="layer"><div class="layer-name">Controller</div><div class="layer-desc">认识 URL 和 HTTP，接收参数，调用 Service，把数据放入 Model，选择页面。<strong>不要堆数据库细节。</strong></div></div>
+                    <div class="layer"><div class="layer-name">Service</div><div class="layer-desc">处理业务规则：登录判断、阅读量去重、所有者校验、事务。它回答“这件业务怎样完成”。</div></div>
+                    <div class="layer"><div class="layer-name">Repository</div><div class="layer-desc">只关心数据访问：按 ID 查、按用户分页、保存、删除。它不应该决定返回哪个 HTML。</div></div>
+                    <div class="layer"><div class="layer-name">Entity / Form</div><div class="layer-desc">Entity 映射数据库表；Form 接收浏览器输入并声明校验规则。两者目的不同。</div></div>
+                    <div class="layer"><div class="layer-name">View</div><div class="layer-desc">Thymeleaf 模板负责展示，不连接数据库，也不写复杂业务判断。</div></div>
+                </div>
+
+                <h3>Model 在 MVC 中是什么？</h3>
+                <p>Model 可以理解成 Controller 交给模板的“数据袋”。例如 <code>model.addAttribute("article", article)</code> 放入一篇文章，模板就能用 <code>${article.title}</code> 读取标题。它不是 Entity，也不是数据库。</p>
+                <div class="code-block"><div class="code-title"><span>典型 Controller 形状</span><button class="copy-button" type="button">复制</button></div><pre><code>@GetMapping("/{id}/{page}.html")
+public String articleList(@PathVariable Integer id,
+                          @PathVariable Integer page,
+                          Model model) {
+    // 1. 接收路径变量
+    // 2. 调用 Service 查询
+    // 3. model.addAttribute(...) 准备页面数据
+    return "article"; // 4. 选择 templates/article.html
+}</code></pre></div>
+
+                <h3>判断一段代码应该放哪一层</h3>
+                <div class="table-wrap"><table><thead><tr><th>问题</th><th>应该放置</th></tr></thead><tbody>
+                    <tr><td>“这个 URL 用 GET 还是 POST？”</td><td>Controller</td></tr>
+                    <tr><td>“当前用户能不能删除这篇文章？”</td><td>Service</td></tr>
+                    <tr><td>“按用户 ID 查询最近 10 篇文章”</td><td>Repository</td></tr>
+                    <tr><td>“标题不允许为空”</td><td>Form 校验（必要时 Service 再保护）</td></tr>
+                    <tr><td>“标题显示成蓝色”</td><td>View/CSS</td></tr>
+                </tbody></table></div>
+                <div class="quiz"><strong>本章自测</strong>如果要加入“只有文章作者才能删除”的规则，主要应该写在哪一层？<details><summary>查看答案</summary><p>Service。Controller 负责接收删除请求，但所有者校验属于业务规则，而且 Service 还可以被其他入口复用。</p></details></div>
+            </article>
+
+            <article class="lesson" id="first-request" data-lesson="first-request" data-keywords="根路径 redirect 重定向 HomeController DispatcherServlet 请求">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 7 章</span><h2>追踪最简单的请求：访问首页</h2><p class="lesson-subtitle">用只有一步业务的请求，认识 Controller 和重定向。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <p>浏览器访问 <code>http://localhost:8080/</code>，对应 <a class="path-link" href="../src/main/java/com/example/myblog/controller/HomeController.java">HomeController.java</a>：</p>
+                <div class="code-block"><div class="code-title"><span>HomeController.java</span><button class="copy-button" type="button">复制</button></div><pre><code>@Controller
+public class HomeController {
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/user/login.html";
+    }
+}</code></pre></div>
+                <ul class="code-explain">
+                    <li><code>@Controller</code> 让 Spring 把这个类注册为处理网页请求的组件。</li>
+                    <li><code>@GetMapping("/")</code> 表示只接收根路径的 GET 请求。</li>
+                    <li><code>redirect:</code> 不是模板名；它要求浏览器再次访问新的 URL。</li>
+                </ul>
+
+                <h3>浏览器实际发生两次请求</h3>
+                <div class="flow"><div class="flow-step"><strong>GET /</strong><small>浏览器第一次请求</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>302</strong><small>服务器说“去登录页”</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>GET /user/login.html</strong><small>浏览器第二次请求</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>200 + HTML</strong><small>显示登录页面</small></div></div>
+
+                <h3><code>redirect:</code> 和直接返回模板的区别</h3>
+                <div class="table-wrap"><table><thead><tr><th>写法</th><th>发生什么</th><th>地址栏</th></tr></thead><tbody><tr><td><code>return "user";</code></td><td>服务器渲染 <code>templates/user.html</code></td><td>保持当前 URL</td></tr><tr><td><code>return "redirect:/user/login.html";</code></td><td>返回 302，让浏览器重新请求</td><td>变成登录 URL</td></tr></tbody></table></div>
+
+                <div class="callout tip"><span class="callout-icon">i</span><div class="callout-content"><strong>DispatcherServlet 在哪里？</strong><p>它由 Spring MVC Starter 自动配置，是所有 MVC 请求的总入口。你没有手写它；它根据 <code>@GetMapping</code> 找到正确方法。</p></div></div>
+            </article>
+
+            <article class="lesson" id="login" data-lesson="login" data-keywords="登录 AccountController UserService Repository 密码 Session Optional authentication">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 8 章</span><h2>登录：第一条完整业务链</h2><p class="lesson-subtitle">这是理解本项目最重要的一章，建议配合断点学习两遍。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <p>核心文件：<a class="path-link" href="../src/main/java/com/example/myblog/controller/AccountController.java">AccountController.java</a>、<a class="path-link" href="../src/main/java/com/example/myblog/service/UserService.java">UserService.java</a>、<a class="path-link" href="../src/main/java/com/example/myblog/repository/MyUserRepository.java">MyUserRepository.java</a>、<a class="path-link" href="../src/main/java/com/example/myblog/util/DjangoPasswordUtil.java">DjangoPasswordUtil.java</a>。</p>
+
+                <h3>先分清 GET 登录页和 POST 登录</h3>
+                <div class="route-list">
+                    <div class="route"><span class="method">GET</span><code>/user/login.html</code><span>只展示登录表单；已登录则跳到自己的文章页。</span></div>
+                    <div class="route"><span class="method post">POST</span><code>/user/login.html</code><span>接收用户名和密码，验证成功后创建登录状态。</span></div>
+                </div>
+
+                <h3>POST 登录的 8 个步骤</h3>
+                <div class="flow"><div class="flow-step"><strong>1 表单</strong><small>username/password</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>2 Controller</strong><small>接收参数</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>3 Service</strong><small>authenticate</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>4 Repository</strong><small>按用户名查询</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>5 密码工具</strong><small>PBKDF2 比对</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>6 Session</strong><small>保存 loginUser</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>7 302</strong><small>重定向</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>8 文章页</strong><small>显示用户内容</small></div></div>
+
+                <div class="code-block"><div class="code-title"><span>Controller 中的核心形状（按真实逻辑简化）</span><button class="copy-button" type="button">复制</button></div><pre><code>@PostMapping("/user/login.html")
+public String login(String username, String password,
+                    HttpSession session, Model model) {
+    return userService.authenticate(username, password)
+        .map(user -&gt; {
+            session.setAttribute("loginUser", user);
+            return "redirect:/" + user.getId() + "/1.html";
+        })
+        .orElseGet(() -&gt; {
+            model.addAttribute("error", "用户名或密码错误");
+            return "user";
+        });
+}</code></pre></div>
+
+                <h3><code>Optional&lt;MyUser&gt;</code> 是什么？</h3>
+                <p>按用户名查询可能找到用户，也可能找不到。<code>Optional</code> 是一个明确表达“可能没有值”的盒子。<code>map</code> 处理找到用户的情况，<code>orElseGet</code> 处理失败情况，减少直接使用 <code>null</code> 的风险。</p>
+
+                <h3>Service 为什么还要检查账号状态？</h3>
+                <p><code>UserService.authenticate</code> 不只核对密码，还应确认用户存在且账号可用。Controller 不需要理解密码格式，只关心认证成功还是失败，这就是分层带来的好处。</p>
+
+                <div class="callout remember"><span class="callout-icon">★</span><div class="callout-content"><strong>Session 不是数据库</strong><p>Session 保存的是本次浏览器会话的登录状态，默认 30 分钟。数据库保存用户长期资料。浏览器用 Cookie 中的会话 ID 找回服务器上的 Session。</p></div></div>
+
+                <h3>登录失败为什么不重定向？</h3>
+                <p>失败时直接返回 <code>user</code> 模板，并把错误文本放入 Model，页面就能立即显示错误。成功时重定向到文章 URL，避免登录表单停留在地址栏。</p>
+
+                <div class="quiz"><strong>本章自测</strong>登录成功后，用户对象保存在哪里？下一次访问后台时怎样知道已经登录？<details><summary>查看答案</summary><p>保存在服务器端 HttpSession 的 <code>loginUser</code> 属性里；浏览器携带 Session Cookie，拦截器读取同一个 Session 判断。</p></details></div>
+            </article>
+
+            <article class="lesson" id="register" data-lesson="register" data-keywords="注册 Form Valid Validation BindingResult NotBlank Size DTO">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 9 章</span><h2>注册与表单校验</h2><p class="lesson-subtitle">把“不可信的浏览器输入”变成可以处理的数据。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <p>注册相关文件：<a class="path-link" href="../src/main/java/com/example/myblog/form/RegisterForm.java">RegisterForm.java</a>、<a class="path-link" href="../src/main/java/com/example/myblog/controller/AccountController.java">AccountController.java</a>、<a class="path-link" href="../src/main/java/com/example/myblog/service/UserService.java">UserService.java</a>。</p>
+
+                <h3>为什么不用 Entity 直接接表单？</h3>
+                <p>数据库用户实体有 ID、注册时间、管理员标记等字段，但注册页面只允许用户填写用户名、密码和确认密码。单独的 Form 类明确限制了输入范围，也方便添加校验，不会让浏览器任意修改数据库敏感字段。</p>
+
+                <div class="code-block"><div class="code-title"><span>RegisterForm.java（核心字段）</span><button class="copy-button" type="button">复制</button></div><pre><code>public class RegisterForm {
+    @NotBlank(message = "请输入用户名")
+    @Size(max = 150, message = "用户名不能超过150个字符")
+    private String username;
+
+    @NotBlank(message = "请输入密码")
+    @Size(min = 6, message = "密码至少需要6个字符")
+    private String password;
+
+    @NotBlank(message = "请再次输入密码")
+    private String confirmPassword;
+}</code></pre></div>
+                <ul class="code-explain">
+                    <li><code>@NotBlank</code> 拒绝 <code>null</code>、空字符串和只有空格的字符串。</li>
+                    <li><code>@Size</code> 检查字符串长度，并给出适合用户阅读的中文错误。</li>
+                    <li>确认密码是页面输入，不需要保存进数据库，所以它属于 Form 而不是 Entity。</li>
+                </ul>
+
+                <div class="code-block"><div class="code-title"><span>Controller 如何启动校验</span><button class="copy-button" type="button">复制</button></div><pre><code>@PostMapping("/user/register.html")
+public String register(
+        @Valid @ModelAttribute RegisterForm registerForm,
+        BindingResult bindingResult,
+        Model model) {
+    if (bindingResult.hasErrors()) {
+        return "user";
+    }
+    // 继续检查两次密码、用户名重复，再调用 userService.register(...)
+}</code></pre></div>
+
+                <h3>四道防线</h3>
+                <div class="flow"><div class="flow-step"><strong>1 HTML</strong><small>required 等体验校验</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>2 Form</strong><small>@NotBlank/@Size</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>3 Service</strong><small>用户名重复、密码一致</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>4 数据库</strong><small>唯一约束和字段限制</small></div></div>
+                <div class="callout warn"><span class="callout-icon">!</span><div class="callout-content"><strong>不能只依靠 JavaScript 校验</strong><p>用户可以关闭 JavaScript，也可以绕过页面直接发送 HTTP 请求。后端校验才是必须存在的安全边界。</p></div></div>
+
+                <h3><code>BindingResult</code> 的位置为什么紧跟 Form？</h3>
+                <p>Spring MVC 约定校验结果参数紧跟被校验对象。这样 <code>@Valid</code> 发现错误时不会直接抛出异常，而是把错误放进 <code>BindingResult</code>，Controller 可以重新显示表单。</p>
+                <div class="quiz"><strong>本章自测</strong>“确认密码”为什么不应该加入 <code>MyUser</code> 实体？<details><summary>查看答案</summary><p>它只是注册时的临时输入，不是需要长期保存的数据库数据。它应该属于 RegisterForm。</p></details></div>
+            </article>
+
+            <article class="lesson" id="routes" data-lesson="routes" data-keywords="URL 路由 HTTP GET POST PathVariable ModelAttribute Restful">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 10 章</span><h2>路由与 HTTP：浏览器怎样找到方法</h2><p class="lesson-subtitle">URL 不只是地址，它还携带资源 ID、页码和动作含义。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <h3>本项目的主要公开路由</h3>
+                <div class="route-list">
+                    <div class="route"><span class="method">GET</span><code>/</code><span>跳到登录页</span></div>
+                    <div class="route"><span class="method">GET</span><code>/{id}/{page}.html</code><span>用户 id 的第 page 页文章</span></div>
+                    <div class="route"><span class="method">GET</span><code>/detail/{id}/{articleId}.html</code><span>文章详情</span></div>
+                    <div class="route"><span class="method post">POST</span><code>/detail/{id}/{articleId}.html</code><span>提交评论</span></div>
+                    <div class="route"><span class="method">GET</span><code>/album/{id}/{page}.html</code><span>相册，每页 8 张</span></div>
+                    <div class="route"><span class="method">GET</span><code>/board/{id}/{page}.html</code><span>留言列表</span></div>
+                    <div class="route"><span class="method post">POST</span><code>/board/{id}/{page}.html</code><span>提交留言</span></div>
+                    <div class="route"><span class="method">GET</span><code>/user/about/{id}.html</code><span>个人资料</span></div>
+                </div>
+
+                <h3>GET 和 POST 的基本分工</h3>
+                <div class="table-wrap"><table><thead><tr><th>方法</th><th>适合做什么</th><th>是否应改变数据</th><th>本项目例子</th></tr></thead><tbody>
+                    <tr><td>GET</td><td>读取页面或数据</td><td>通常不应</td><td>文章列表、打开编辑表单</td></tr>
+                    <tr><td>POST</td><td>提交表单、创建/修改/删除</td><td>会</td><td>登录、评论、后台保存</td></tr>
+                </tbody></table></div>
+
+                <h3><code>@PathVariable</code> 如何取出 URL 中的值</h3>
+                <div class="code-block"><div class="code-title"><span>路径变量</span><button class="copy-button" type="button">复制</button></div><pre><code>@GetMapping("/detail/{id}/{articleId}.html")
+public String detail(@PathVariable Integer id,
+                     @PathVariable Integer articleId, ...) {
+    // /detail/3/7.html → id=3, articleId=7
+}</code></pre></div>
+                <p>花括号定义“可变位置”。Spring 根据同名参数把文本转换为 <code>Integer</code>。如果传入无法转换的内容，请求会报 400。</p>
+
+                <h3>为什么删除使用 POST 而不是 GET？</h3>
+                <p>GET 链接可能被浏览器预加载、搜索引擎抓取或误点。删除会改变数据，应该明确提交 POST 表单。本项目后台删除路由形如 <code>/admin/article/articleinfo/{id}/delete/</code>，并再次校验数据所有者。</p>
+            </article>
+
+            <article class="lesson" id="pagination" data-lesson="pagination" data-keywords="分页 Page Pageable PageRequest 0 1 safePage Sort 文章列表">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 11 章</span><h2>文章列表与分页</h2><p class="lesson-subtitle">重点理解浏览器页码和 Spring Data 页码相差 1。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <p>源码：<a class="path-link" href="../src/main/java/com/example/myblog/controller/ArticleController.java">ArticleController.java</a>、<a class="path-link" href="../src/main/java/com/example/myblog/service/ArticleService.java">ArticleService.java</a>、<a class="path-link" href="../src/main/java/com/example/myblog/repository/ArticleInfoRepository.java">ArticleInfoRepository.java</a>。</p>
+
+                <h3>页码转换</h3>
+                <p>用户习惯把第一页称为 1；Spring Data 的第一页编号是 0。所以访问 <code>/3/1.html</code> 时，Service 必须把 1 转成 0。</p>
+                <div class="code-block"><div class="code-title"><span>ArticleService.findPage</span><button class="copy-button" type="button">复制</button></div><pre><code>public Page&lt;ArticleInfo&gt; findPage(Integer userId, int pageNumber) {
+    int safePage = Math.max(1, pageNumber) - 1;
+    Page&lt;ArticleInfo&gt; page = articleRepository
+        .findByAuthorIdOrderByCreatedDesc(
+            userId,
+            PageRequest.of(safePage, 10,
+                Sort.by(Sort.Direction.DESC, "created")));
+
+    if (page.getTotalPages() &gt; 0 &amp;&amp; safePage &gt;= page.getTotalPages()) {
+        // 页码过大时改查最后一页
+    }
+    return page;
+}</code></pre></div>
+                <ul class="code-explain"><li><code>Math.max(1, pageNumber)</code> 把 0 或负数修正为浏览器第 1 页。</li><li>减 1 后变成 Spring Data 的 0 基页码。</li><li><code>PageRequest.of(..., 10, ...)</code> 表示每页 10 条。</li><li><code>created DESC</code> 让最新文章排在前面。</li><li>请求第 999 页时自动落到最后一页，保持原 Django 项目体验。</li></ul>
+
+                <h3><code>Page&lt;ArticleInfo&gt;</code> 不只是文章列表</h3>
+                <div class="table-wrap"><table><thead><tr><th>属性/方法</th><th>含义</th></tr></thead><tbody>
+                    <tr><td><code>getContent()</code></td><td>当前页的文章集合</td></tr>
+                    <tr><td><code>getNumber()</code></td><td>当前 0 基页码</td></tr>
+                    <tr><td><code>getTotalPages()</code></td><td>总页数</td></tr>
+                    <tr><td><code>getTotalElements()</code></td><td>总文章数</td></tr>
+                    <tr><td><code>hasNext()/hasPrevious()</code></td><td>是否还有下一页/上一页</td></tr>
+                </tbody></table></div>
+
+                <h3>Controller 和模板怎样配合</h3>
+                <p>Controller 将 <code>pageInfo</code> 放进 Model，<a class="path-link" href="../src/main/resources/templates/article.html">article.html</a> 用 <code>th:each</code> 循环当前页内容，并根据页码生成上一页、下一页链接。</p>
+                <div class="callout remember"><span class="callout-icon">★</span><div class="callout-content"><strong>常见 off-by-one 错误</strong><p>如果忘了减 1，浏览器访问第 1 页时会查询 Spring 的第 2 页。这种“刚好差一个”的错误称为 off-by-one。</p></div></div>
+            </article>
+
+            <article class="lesson" id="detail" data-lesson="detail" data-keywords="文章详情 阅读量 Session Transactional 事务 原子更新 reading">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 12 章</span><h2>文章详情、阅读量与事务</h2><p class="lesson-subtitle">同一浏览器会话对同一篇文章只增加一次阅读量。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <h3>Controller 先决定是否增加阅读量</h3>
+                <div class="code-block"><div class="code-title"><span>ArticleController.detail（真实核心代码）</span><button class="copy-button" type="button">复制</button></div><pre><code>String readingKey = "reading" + id + articleId;
+boolean firstReading = session.getAttribute(readingKey) == null;
+ArticleInfo article = articleService.findDetail(articleId, firstReading);
+if (firstReading) {
+    session.setAttribute(readingKey, Boolean.TRUE);
+}</code></pre></div>
+                <p>假设博客用户 id 为 3、文章 id 为 7，Session 键会是 <code>reading37</code>。第一次没有这个键，所以增加；随后写入 <code>true</code>，本会话再次刷新就不增加。</p>
+
+                <div class="callout warn"><span class="callout-icon">!</span><div class="callout-content"><strong>这个去重不是绝对准确的统计</strong><p>换浏览器、清 Cookie、Session 过期都会再次计数。它是简单项目的合理方案，不等于基于用户/IP/日志的专业统计系统。</p></div></div>
+
+                <h3>Service 把更新和查询放在一个事务里</h3>
+                <div class="code-block"><div class="code-title"><span>ArticleService.findDetail</span><button class="copy-button" type="button">复制</button></div><pre><code>@Transactional
+public ArticleInfo findDetail(Integer articleId, boolean increaseReading) {
+    if (increaseReading) {
+        articleRepository.increaseReading(articleId);
+    }
+    return articleRepository.findDetailById(articleId)
+        .orElseThrow(() -&gt;
+            new IllegalArgumentException("文章不存在：" + articleId));
+}</code></pre></div>
+
+                <h3><code>@Transactional</code> 是什么？</h3>
+                <p>事务把一组数据库操作看成一个工作单元。正常结束就提交，发生运行时异常通常回滚。这里先更新阅读量，再查询文章；事务也保证 <code>@Modifying</code> 更新处于有效写事务中。</p>
+                <div class="callout remember"><span class="callout-icon">★</span><div class="callout-content"><strong>事务应该标在业务边界</strong><p>不是所有方法都要加 <code>@Transactional</code>。当一个业务动作包含需要保持一致的一组读写操作时，再由 Service 声明事务。</p></div></div>
+
+                <h3>为什么阅读量用数据库加 1，而不是 Java 先读后写？</h3>
+                <div class="code-block"><div class="code-title"><span>Repository 原子更新</span><button class="copy-button" type="button">复制</button></div><pre><code>@Modifying(clearAutomatically = true)
+@Query("update ArticleInfo a " +
+       "set a.reading = a.reading + 1 where a.id = :id")
+int increaseReading(@Param("id") Integer id);</code></pre></div>
+                <p>数据库执行一条 <code>reading = reading + 1</code>，比 Java “先读取旧值，再保存新值”少一次往返，也能减少多个请求同时覆盖彼此结果的问题。</p>
+            </article>
+
+            <article class="lesson" id="comment" data-lesson="comment" data-keywords="评论 POST Redirect GET PRG CommentForm BindingResult 重复提交">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 13 章</span><h2>评论提交与 POST-Redirect-GET</h2><p class="lesson-subtitle">理解表单失败为何原页返回，成功为何必须重定向。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <p>评论表单提交到当前详情 URL。<a class="path-link" href="../src/main/java/com/example/myblog/form/CommentForm.java">CommentForm.java</a> 校验姓名和内容；<code>ArticleController.addComment</code> 根据校验结果走两条分支。</p>
+
+                <div class="code-block"><div class="code-title"><span>评论 Controller</span><button class="copy-button" type="button">复制</button></div><pre><code>@PostMapping("/detail/{id}/{articleId}.html")
+public String addComment(...,
+        @Valid @ModelAttribute CommentForm commentForm,
+        BindingResult bindingResult,
+        Model model) {
+    if (bindingResult.hasErrors()) {
+        prepareDetail(model, id,
+            articleService.findDetail(articleId, false));
+        model.addAttribute("tips",
+            bindingResult.getAllErrors().get(0).getDefaultMessage());
+        return "detail";
+    }
+    articleService.addComment(articleId, commentForm);
+    return "redirect:/detail/" + id + "/" + articleId + ".html";
+}</code></pre></div>
+
+                <h3>失败分支为什么要重新准备详情数据？</h3>
+                <p>返回 <code>detail</code> 模板不代表模板自动拥有文章、标签和旧评论。新的 POST 请求有自己的 Model，所以必须再次调用 <code>prepareDetail</code> 填齐页面数据。传入 <code>false</code>，避免表单错误也增加阅读量。</p>
+
+                <h3>成功后的 PRG 模式</h3>
+                <div class="flow"><div class="flow-step"><strong>POST</strong><small>提交评论</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>保存成功</strong><small>事务提交</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>302 Redirect</strong><small>跳回详情</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>GET</strong><small>重新读取页面</small></div></div>
+                <p>这叫 <strong>POST-Redirect-GET（PRG）</strong>。最终地址对应 GET，用户刷新页面时不会让浏览器再次提交上一条评论。</p>
+
+                <h3>Service 保存评论</h3>
+                <p>Service 先确认文章存在，再创建 <code>Comment</code>，设置文章关系、去掉姓名和内容两边空格，最后调用 Repository 保存。这些是业务与数据规则，不应该写到模板里。</p>
+                <div class="quiz"><strong>本章自测</strong>校验失败时为什么不能直接只写 <code>return "detail";</code>？<details><summary>查看答案</summary><p>因为本次 POST 的 Model 还没有文章、标签、评论和公共侧栏数据，模板渲染会缺内容；需要重新准备完整 Model。</p></details></div>
+            </article>
+
+            <article class="lesson" id="entity" data-lesson="entity" data-keywords="JPA Entity Table Id Column ManyToOne ManyToMany JoinTable 数据库关系">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 14 章</span><h2>Entity：Java 对象如何对应数据库表</h2><p class="lesson-subtitle">JPA 让代码操作对象，Hibernate 再把操作翻译成 SQL。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <div class="entity-map">
+                    <div class="entity"><h4>MyUser</h4><ul><li>表：account_myuser</li><li>登录资料、个人资料</li><li>一名用户有多篇文章</li></ul></div>
+                    <div class="entity"><h4>ArticleInfo</h4><ul><li>表：article_articleinfo</li><li>标题、正文、图片、阅读量</li><li>属于作者，拥有多个标签</li></ul></div>
+                    <div class="entity"><h4>ArticleTag</h4><ul><li>表：article_articletag</li><li>文章分类名称</li><li>属于一个用户</li></ul></div>
+                    <div class="entity"><h4>Comment</h4><ul><li>表：article_comment</li><li>评论人、内容、时间</li><li>属于一篇文章</li></ul></div>
+                    <div class="entity"><h4>AlbumInfo</h4><ul><li>表：album_albuminfo</li><li>相册标题、介绍、图片</li><li>属于一个用户</li></ul></div>
+                    <div class="entity"><h4>Board</h4><ul><li>表：interflow_board</li><li>姓名、邮箱、留言</li><li>属于一个博客用户</li></ul></div>
+                </div>
+                <div class="relationship">MyUser 1 ── N ArticleInfo　｜　ArticleInfo N ── N ArticleTag　｜　ArticleInfo 1 ── N Comment</div>
+
+                <h3>以文章实体为例认识注解</h3>
+                <p>打开 <a class="path-link" href="../src/main/java/com/example/myblog/entity/ArticleInfo.java">ArticleInfo.java</a>：</p>
+                <div class="code-block"><div class="code-title"><span>ArticleInfo.java（关系示意）</span><button class="copy-button" type="button">复制</button></div><pre><code>@Entity
+@Table(name = "article_articleinfo")
+public class ArticleInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private MyUser author;
+
+    @ManyToMany
+    @JoinTable(name = "article_articleinfo_tags", ...)
+    private Set&lt;ArticleTag&gt; tags = new LinkedHashSet&lt;&gt;();
+}</code></pre></div>
+                <ul class="code-explain"><li><code>@Entity</code> 声明这是 JPA 管理的持久化类。</li><li><code>@Table</code> 指定旧 Django 表名，避免 Hibernate 猜错。</li><li><code>@Id</code> 是主键；<code>IDENTITY</code> 表示 MySQL 自增。</li><li><code>@ManyToOne</code> 表示许多文章可以属于同一作者。</li><li><code>@ManyToMany</code> 通过中间表保存文章和标签的多对多关系。</li></ul>
+
+                <h3>LAZY（懒加载）是什么？</h3>
+                <p>查询文章时不一定立刻查询作者或标签，等真正访问关联属性时再加载，称为懒加载。它能减少不需要的数据，但如果事务已经结束再访问，可能出现 <code>LazyInitializationException</code>。本项目详情查询用 <code>@EntityGraph</code> 主动取出所需关系。</p>
+
+                <div class="callout tip"><span class="callout-icon">i</span><div class="callout-content"><strong>为什么表名看起来像 Django？</strong><p>这是从 Python Django 迁移来的现有数据库。Java 实体直接映射原表，既保留原内容，也展示了真实迁移项目常见的“兼容旧结构”思路。</p></div></div>
+            </article>
+
+            <article class="lesson" id="repository" data-lesson="repository" data-keywords="Repository JpaRepository 方法名派生查询 EntityGraph JPQL Modifying Optional Pageable">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 15 章</span><h2>Repository：从方法名到 SQL</h2><p class="lesson-subtitle">简单查询让 Spring Data 生成，特殊查询再写 JPQL。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <div class="code-block"><div class="code-title"><span>ArticleInfoRepository.java</span><button class="copy-button" type="button">复制</button></div><pre><code>public interface ArticleInfoRepository
+        extends JpaRepository&lt;ArticleInfo, Integer&gt; {
+
+    Page&lt;ArticleInfo&gt; findByAuthorIdOrderByCreatedDesc(
+        Integer authorId, Pageable pageable);
+
+    Optional&lt;ArticleInfo&gt; findByIdAndAuthorId(
+        Integer id, Integer authorId);
+
+    long countByAuthorId(Integer authorId);
+}</code></pre></div>
+
+                <h3>接口为什么没有实现类也能运行？</h3>
+                <p>启动时 Spring Data 读取接口和方法名，动态生成代理对象。Service 注入的是这个代理；调用方法时，代理把方法名解析成数据库查询。</p>
+                <div class="table-wrap"><table><thead><tr><th>方法名片段</th><th>解释</th><th>近似 SQL 思路</th></tr></thead><tbody>
+                    <tr><td><code>findByAuthorId</code></td><td>按关联作者的 id 查询</td><td><code>where author_id = ?</code></td></tr>
+                    <tr><td><code>OrderByCreatedDesc</code></td><td>按创建时间倒序</td><td><code>order by created desc</code></td></tr>
+                    <tr><td><code>findByIdAndAuthorId</code></td><td>ID 和作者 ID 同时满足</td><td><code>where id=? and author_id=?</code></td></tr>
+                    <tr><td><code>countByAuthorId</code></td><td>统计作者文章数</td><td><code>select count(*) ...</code></td></tr>
+                </tbody></table></div>
+
+                <h3>详情查询为什么写 <code>@Query</code>？</h3>
+                <div class="code-block"><div class="code-title"><span>预加载详情关联</span><button class="copy-button" type="button">复制</button></div><pre><code>@EntityGraph(attributePaths = {"tags", "author"})
+@Query("select a from ArticleInfo a where a.id = :id")
+Optional&lt;ArticleInfo&gt; findDetailById(@Param("id") Integer id);</code></pre></div>
+                <p><code>@Query</code> 使用 JPQL，写的是实体类和属性名，不是直接写表名和列名。<code>@EntityGraph</code> 要求本次查询一起加载标签和作者，确保关闭 Open Session in View 后模板仍能安全读取。</p>
+
+                <h3><code>@Modifying</code> 为什么必须加？</h3>
+                <p><code>@Query</code> 默认被当成查询语句。执行 update/delete 时需要 <code>@Modifying</code> 明确告诉 Spring Data：这条语句会修改数据；调用它的 Service 还需要事务。</p>
+
+                <div class="callout remember"><span class="callout-icon">★</span><div class="callout-content"><strong>选择顺序</strong><p>先用 <code>JpaRepository</code> 自带方法；再用方法名派生查询；表达不了时才写 <code>@Query</code>。这样对初学者最直观。</p></div></div>
+                <div class="quiz"><strong>本章自测</strong><code>findByIdAndAuthorId</code> 为什么比只用 <code>findById</code> 更适合后台编辑？<details><summary>查看答案</summary><p>它把数据 ID 和当前作者 ID 一起作为条件，能防止登录用户通过修改 URL 编辑别人的数据。</p></details></div>
+            </article>
+
+            <article class="lesson" id="thymeleaf" data-lesson="thymeleaf" data-keywords="Thymeleaf th:text th:utext th:each th:if fragment 模板 表单 XSS">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 16 章</span><h2>Thymeleaf：Java 数据怎样进入 HTML</h2><p class="lesson-subtitle">模板是 HTML 加少量 <code>th:*</code> 属性，不负责查询数据库。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <p>主要模板位于 <code>src/main/resources/templates</code>。建议对照 <a class="path-link" href="../src/main/resources/templates/article.html">article.html</a>、<a class="path-link" href="../src/main/resources/templates/detail.html">detail.html</a> 和 <a class="path-link" href="../src/main/resources/templates/fragments/common.html">fragments/common.html</a>。</p>
+
+                <h3>Controller 返回的字符串怎样找到页面？</h3>
+                <div class="flow"><div class="flow-step"><strong>return "article"</strong><small>逻辑视图名</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>前缀</strong><small>templates/</small></div><div class="flow-arrow">+</div><div class="flow-step"><strong>后缀</strong><small>.html</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>模板文件</strong><small>templates/article.html</small></div></div>
+
+                <div class="table-wrap"><table><thead><tr><th>语法</th><th>作用</th><th>例子</th></tr></thead><tbody>
+                    <tr><td><code>th:text</code></td><td>输出纯文本，并转义 HTML</td><td><code>th:text="${article.title}"</code></td></tr>
+                    <tr><td><code>th:utext</code></td><td>输出未经转义的 HTML</td><td>显示 CKEditor 富文本正文</td></tr>
+                    <tr><td><code>th:each</code></td><td>循环集合</td><td>循环文章、评论、标签</td></tr>
+                    <tr><td><code>th:if</code></td><td>条件成立才输出元素</td><td>有下一页时显示链接</td></tr>
+                    <tr><td><code>th:href</code></td><td>动态生成链接</td><td>拼接用户 ID 和页码</td></tr>
+                    <tr><td><code>th:object / th:field</code></td><td>绑定 Form 对象和字段</td><td>注册、评论、留言表单</td></tr>
+                    <tr><td><code>th:replace</code></td><td>插入可复用片段</td><td>公共头部、导航、侧栏</td></tr>
+                </tbody></table></div>
+
+                <div class="code-block"><div class="code-title"><span>循环文章的概念示例</span><button class="copy-button" type="button">复制</button></div><pre><code>&lt;article th:each="article : ${pageInfo.content}"&gt;
+    &lt;h2 th:text="${article.title}"&gt;这里是静态占位标题&lt;/h2&gt;
+    &lt;a th:href="@{/detail/{uid}/{aid}.html(
+         uid=${user.id}, aid=${article.id})}"&gt;查看全文&lt;/a&gt;
+&lt;/article&gt;</code></pre></div>
+                <p><code>article</code> 是每次循环的临时变量；<code>pageInfo.content</code> 来自 Controller 放入 Model 的分页数据。标签之间的中文是静态占位，直接打开模板时也方便看结构。</p>
+
+                <h3><code>th:text</code> 与 <code>th:utext</code> 的安全区别</h3>
+                <p>如果标题是 <code>&lt;script&gt;...</code>，<code>th:text</code> 会把尖括号转义成普通文字；<code>th:utext</code> 会把内容当 HTML 执行。本项目只有经过后台 CKEditor 编辑的文章正文使用 <code>th:utext</code>。</p>
+                <div class="callout danger"><span class="callout-icon">×</span><div class="callout-content"><strong>不要对访客输入使用 th:utext</strong><p>评论、留言、用户名等不可信内容必须使用 <code>th:text</code>，否则可能造成 XSS（恶意脚本注入）。</p></div></div>
+
+                <h3>Fragment 为什么重要？</h3>
+                <p>文章、相册、留言、关于页面都有相同导航和侧栏。把它们放进 <code>fragments/common.html</code>，修改一处就能影响所有页面，这相当于 Java 中提取公共方法。</p>
+            </article>
+
+            <article class="lesson" id="session" data-lesson="session" data-keywords="Session Cookie Interceptor HandlerInterceptor GlobalViewData ControllerAdvice loginUser 权限">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 17 章</span><h2>Session、拦截器与全局页面数据</h2><p class="lesson-subtitle">登录状态只保存一次，后台请求统一检查，模板统一读取。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <h3>Session 与 Cookie 的配合</h3>
+                <div class="flow"><div class="flow-step"><strong>登录成功</strong><small>服务器创建 Session</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>Set-Cookie</strong><small>浏览器记住会话 ID</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>后续请求</strong><small>自动携带 Cookie</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>读取 loginUser</strong><small>恢复登录状态</small></div></div>
+                <p>Session 默认超时 30 分钟，配置在 <code>application.properties</code>。退出登录时调用 <code>session.invalidate()</code> 使整个会话失效。</p>
+
+                <h3>拦截器统一保护后台</h3>
+                <p>源码：<a class="path-link" href="../src/main/java/com/example/myblog/config/AdminLoginInterceptor.java">AdminLoginInterceptor.java</a>、<a class="path-link" href="../src/main/java/com/example/myblog/config/WebMvcConfig.java">WebMvcConfig.java</a>。</p>
+                <div class="code-block"><div class="code-title"><span>拦截器核心思路</span><button class="copy-button" type="button">复制</button></div><pre><code>public boolean preHandle(HttpServletRequest request,
+                         HttpServletResponse response,
+                         Object handler) throws IOException {
+    MyUser user = (MyUser) request.getSession()
+        .getAttribute("loginUser");
+    if (user == null || !user.isActive() || !user.isStaff()) {
+        response.sendRedirect("/user/login.html");
+        return false;
+    }
+    return true;
+}</code></pre></div>
+                <p><code>preHandle</code> 在 Controller 之前执行。返回 <code>false</code> 表示中断请求；返回 <code>true</code> 才继续。这样不必在 30 多个后台方法开头重复写登录判断。</p>
+
+                <div class="code-block"><div class="code-title"><span>WebMvcConfig 注册保护范围</span><button class="copy-button" type="button">复制</button></div><pre><code>registry.addInterceptor(adminLoginInterceptor)
+    .addPathPatterns("/admin/**", "/ckeditor/**");</code></pre></div>
+                <p><code>/**</code> 表示该路径下面的所有层级。CKEditor 上传也会写文件，因此同样必须登录。</p>
+
+                <h3>全局 Model 属性</h3>
+                <p><a class="path-link" href="../src/main/java/com/example/myblog/config/GlobalViewData.java">GlobalViewData.java</a> 使用 <code>@ControllerAdvice</code> 和 <code>@ModelAttribute("loginUser")</code>，让每个模板都能读取当前登录用户，不必每个 Controller 重复添加。</p>
+
+                <div class="callout warn"><span class="callout-icon">!</span><div class="callout-content"><strong>拦截器只解决“是否进入后台”</strong><p>进入后台后还要验证“这条数据是不是当前用户的”。否则已登录用户可能修改 URL 中的 ID，操作别人的文章。第二层校验由 <code>AdminService</code> 完成。</p></div></div>
+            </article>
+
+            <article class="lesson" id="admin" data-lesson="admin" data-keywords="后台 CRUD Create Read Update Delete AdminController AdminService 所有者 权限">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 18 章</span><h2>后台 CRUD 与数据所有者隔离</h2><p class="lesson-subtitle">不仅要能增删改查，还要保证用户只能操作自己的数据。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <h3>CRUD 是哪四个动作？</h3>
+                <div class="cards">
+                    <div class="mini-card"><span class="badge">Create</span><h4>新增</h4><p>打开空表单 → POST 保存，例如新增文章。</p></div>
+                    <div class="mini-card"><span class="badge">Read</span><h4>查询</h4><p>列表和详情，例如查看自己的所有文章。</p></div>
+                    <div class="mini-card"><span class="badge">Update</span><h4>修改</h4><p>按 ID 读取旧数据 → 表单编辑 → POST 保存。</p></div>
+                    <div class="mini-card"><span class="badge">Delete</span><h4>删除</h4><p>POST 删除，并处理评论、标签关系等关联数据。</p></div>
+                </div>
+
+                <p>入口集中在 <a class="path-link" href="../src/main/java/com/example/myblog/controller/AdminController.java">AdminController.java</a>，业务集中在 <a class="path-link" href="../src/main/java/com/example/myblog/service/AdminService.java">AdminService.java</a>。后台涵盖用户资料、文章、标签、评论、相册和留言。</p>
+
+                <h3>以修改文章为例</h3>
+                <ol class="step-list">
+                    <li><strong>GET 打开编辑页</strong>URL 含文章 ID；Controller 取出 Session 登录用户。</li>
+                    <li><strong>Service 按文章 ID + 用户 ID 查询</strong>找不到就拒绝，不能仅按文章 ID 查询。</li>
+                    <li><strong>Model 准备旧文章和可选标签</strong>Thymeleaf 把旧值填回表单。</li>
+                    <li><strong>用户 POST 新内容</strong>Controller 接收普通字段、标签 ID 和可选封面文件。</li>
+                    <li><strong>Service 更新允许修改的字段</strong>重新检查所有者，处理标签关系，事务提交。</li>
+                    <li><strong>重定向回列表</strong>避免刷新重复保存，并显示成功消息。</li>
+                </ol>
+
+                <h3>两层权限保护</h3>
+                <div class="layer-stack">
+                    <div class="layer"><div class="layer-name">入口保护</div><div class="layer-desc"><code>AdminLoginInterceptor</code>：只有已登录且 active/staff 的用户能访问后台。</div></div>
+                    <div class="layer"><div class="layer-name">数据保护</div><div class="layer-desc"><code>findByIdAndAuthorId</code> 或 Service 所有者检查：只允许操作当前用户拥有的数据。</div></div>
+                </div>
+
+                <h3>删除文章为什么比 <code>deleteById</code> 复杂？</h3>
+                <p>文章与标签有多对多中间表，还拥有评论。如果直接删除主体，可能违反外键约束或留下孤儿数据。<code>AdminService</code> 在事务内先清理标签关联和评论，再删除文章，确保数据库保持一致。</p>
+
+                <div class="callout remember"><span class="callout-icon">★</span><div class="callout-content"><strong>面试可讲的亮点</strong><p>“我没有只在页面隐藏按钮，而是在 Service 查询条件中加入当前用户 ID，因为前端限制可以被绕过，后端才是权限边界。”</p></div></div>
+            </article>
+
+            <article class="lesson" id="upload" data-lesson="upload" data-keywords="图片 上传 MultipartFile media static WebMvcConfig FileStorageService UUID 路径 404 bug">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 19 章</span><h2>图片上传、保存和浏览器显示</h2><p class="lesson-subtitle">这是本项目实际修复过的 Bug，也是一条很完整的文件链路。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <div class="lead-box"><strong>已经修复的根因：</strong>Java 版原先把媒体目录指向外层 Python 项目的 <code>myblog/media</code>，导致项目离开原目录或 IDEA 工作目录变化后图片 404。现在所有必需图片都在 Java 项目内部。</div>
+
+                <h3>两类图片来源</h3>
+                <div class="cards">
+                    <div class="mini-card"><span class="badge">随项目发布</span><h4>内置旧图片</h4><p><code>src/main/resources/static/media</code>，随 JAR 打包，保存原数据库已引用的头像、文章图和相册图。</p></div>
+                    <div class="mini-card"><span class="badge">运行时写入</span><h4>新上传图片</h4><p><code>storage/media</code>，可写目录，不塞进已打包 JAR；默认仍位于 Java 项目内。</p></div>
+                </div>
+
+                <h3>完整上传链路</h3>
+                <div class="flow"><div class="flow-step"><strong>1 multipart 表单</strong><small>选择本地文件</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>2 MultipartFile</strong><small>Controller 接收</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>3 FileStorageService</strong><small>验证并改名</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>4 storage/media</strong><small>写入项目目录</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>5 数据库</strong><small>只存相对路径</small></div><div class="flow-arrow">→</div><div class="flow-step"><strong>6 /media/**</strong><small>浏览器读取</small></div></div>
+
+                <p>文件服务源码：<a class="path-link" href="../src/main/java/com/example/myblog/service/FileStorageService.java">FileStorageService.java</a>。它检查扩展名、使用 UUID 生成新文件名、创建目标目录、规范化路径并阻止目录穿越。</p>
+
+                <div class="code-block"><div class="code-title"><span>上传目录配置</span><button class="copy-button" type="button">复制</button></div><pre><code>app.upload-dir=${MYBLOG_UPLOAD_DIR:${user.dir}/storage/media}</code></pre></div>
+                <p>数据库只保存类似 <code>images/article/uuid.png</code> 的相对路径，不保存 <code>D:\...</code> 绝对路径。这样换电脑后只需改变媒体根目录，数据库内容无需修改。</p>
+
+                <h3><code>/media/**</code> 怎样映射到两个目录？</h3>
+                <div class="code-block"><div class="code-title"><span>WebMvcConfig（核心含义）</span><button class="copy-button" type="button">复制</button></div><pre><code>registry.addResourceHandler("/media/**")
+    .addResourceLocations(
+        uploadDirectoryUri,
+        "classpath:/static/media/");</code></pre></div>
+                <p>Spring 按顺序查找：先找运行时上传目录，再找 classpath 内置媒体。请求 <code>/media/images/user/1.png</code> 时，浏览器不需要知道磁盘实际位置。</p>
+
+                <h3>另一类普通静态图片</h3>
+                <p>CSS、JS、登录背景等放在 <code>static</code> 根目录，直接用 <code>/images/1.jpg</code> 或 <code>/css/...</code>。登录背景曾残留 Django 路径 <code>/static/images/1.jpg</code>，也已改为 Spring Boot 的 <code>/images/1.jpg</code>。</p>
+
+                <h3>图片 404 的排查顺序</h3>
+                <ol class="step-list">
+                    <li><strong>看浏览器 Network</strong>确认实际请求 URL 和状态码，而不是只看破图图标。</li>
+                    <li><strong>看页面生成的 src</strong>判断是 <code>/media/**</code> 还是普通 <code>/images/**</code>。</li>
+                    <li><strong>核对数据库相对路径</strong>不要重复拼接 <code>media/</code>。</li>
+                    <li><strong>核对磁盘/classpath 文件</strong>文件名大小写、扩展名和目录必须一致。</li>
+                    <li><strong>核对 WebMvcConfig 和工作目录</strong>确认资源映射指向当前 Java 项目。</li>
+                </ol>
+                <div class="callout tip"><span class="callout-icon">i</span><div class="callout-content"><strong>为什么不把新上传文件写进 resources？</strong><p>打包后 resources 在 JAR 内，通常不可直接写入；而且下次重新打包会覆盖构建产物。运行时数据应该放在独立可写目录。</p></div></div>
+            </article>
+
+            <article class="lesson" id="password" data-lesson="password" data-keywords="密码 PBKDF2 SHA256 Django salt hash 哈希 加密 验证 安全">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 20 章</span><h2>兼容 Django 的密码哈希</h2><p class="lesson-subtitle">迁移数据库后，旧账号无需重设密码仍可登录。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <p>工具类：<a class="path-link" href="../src/main/java/com/example/myblog/util/DjangoPasswordUtil.java">DjangoPasswordUtil.java</a>。数据库密码字段类似：</p>
+                <div class="code-block"><div class="code-title"><span>Django 密码字符串格式</span><button class="copy-button" type="button">复制</button></div><pre><code>pbkdf2_sha256$390000$随机salt$Base64编码的哈希结果</code></pre></div>
+
+                <h3>哈希不是加密</h3>
+                <div class="table-wrap"><table><thead><tr><th>概念</th><th>能否还原原文</th><th>用途</th></tr></thead><tbody><tr><td>加密</td><td>有密钥时可以解密</td><td>保护需要恢复的内容</td></tr><tr><td>哈希</td><td>设计目标是不可逆</td><td>比较密码、校验文件</td></tr></tbody></table></div>
+                <p>登录不是“解密数据库密码”，而是取出其中的算法、迭代次数和 salt，用用户本次输入重新计算哈希，再比较两个字节数组。</p>
+
+                <h3>验证的 6 个步骤</h3>
+                <ol class="step-list">
+                    <li><strong>按 <code>$</code> 拆分旧字符串</strong>得到算法、迭代次数、salt 和哈希。</li>
+                    <li><strong>检查算法</strong>只接受项目支持的 <code>pbkdf2_sha256</code>。</li>
+                    <li><strong>读取每条记录自己的迭代次数</strong>旧数据库同时存在不同次数，不能写死一个值来验证。</li>
+                    <li><strong>使用 PBKDF2WithHmacSHA256</strong>以用户输入和 salt 重新计算。</li>
+                    <li><strong>Base64 解码数据库哈希</strong>转回字节数组。</li>
+                    <li><strong>固定时间比较</strong>用 <code>MessageDigest.isEqual</code>，减少普通字符串比较泄漏时序信息。</li>
+                </ol>
+
+                <h3>新注册账号怎样保存？</h3>
+                <p>生成随机 salt，以 390000 次迭代计算 PBKDF2-HMAC-SHA256，再拼成同一 Django 格式。这样 Java 新账号和旧账号共用一套校验代码。</p>
+
+                <div class="callout warn"><span class="callout-icon">!</span><div class="callout-content"><strong>salt 不是密码，也不必保密</strong><p>salt 的作用是让相同密码得到不同哈希，并抵抗预计算表攻击；它与哈希一起存储。真正不能保存的是明文密码。</p></div></div>
+                <div class="quiz"><strong>本章自测</strong>数据库里两名用户密码相同，哈希结果应该相同吗？为什么？<details><summary>查看答案</summary><p>通常不同，因为每次生成随机 salt。即使原密码相同，参与计算的数据不同，结果也不同。</p></details></div>
+            </article>
+
+            <article class="lesson" id="test" data-lesson="test" data-keywords="测试 JUnit H2 MockMvc SpringBootTest MediaResourceTests 单元 集成 回归">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 21 章</span><h2>自动化测试：改代码后怎样放心</h2><p class="lesson-subtitle">测试不是为了得到绿色图标，而是保护关键行为不被下一次修改破坏。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <p>运行命令：</p>
+                <div class="code-block"><div class="code-title"><span>运行全部测试</span><button class="copy-button" type="button">复制</button></div><pre><code>.\mvnw.cmd test</code></pre></div>
+
+                <h3>当前 7 项测试保护什么</h3>
+                <div class="table-wrap"><table><thead><tr><th>测试类</th><th>数量</th><th>保护目标</th></tr></thead><tbody>
+                    <tr><td><a class="path-link" href="../src/test/java/com/example/myblog/MyBlogApplicationTests.java">MyBlogApplicationTests</a></td><td>1</td><td>Spring 上下文、JPA 和配置能够启动</td></tr>
+                    <tr><td><a class="path-link" href="../src/test/java/com/example/myblog/util/DjangoPasswordUtilTests.java">DjangoPasswordUtilTests</a></td><td>3</td><td>独立固定向量、错误密码、异常格式</td></tr>
+                    <tr><td><a class="path-link" href="../src/test/java/com/example/myblog/MediaResourceTests.java">MediaResourceTests</a></td><td>3</td><td>内置媒体、新上传媒体、登录背景图片均可 HTTP 访问</td></tr>
+                </tbody></table></div>
+
+                <h3>为什么测试使用 H2，不直接用 MySQL？</h3>
+                <p>测试要可重复、快速、不会污染真实博客数据。<a class="path-link" href="../src/test/resources/application.properties">测试 application.properties</a> 把数据源换成内存 H2，并启用 MySQL 兼容模式；测试结束后内存数据自动消失。</p>
+
+                <h3>单元测试与集成测试</h3>
+                <div class="cards"><div class="mini-card"><span class="badge">单元测试</span><h4>密码工具</h4><p>直接调用纯 Java 工具，速度快，关注一个类的输入和输出。</p></div><div class="mini-card"><span class="badge">集成测试</span><h4>媒体 HTTP</h4><p>真正启动随机端口的 Spring Web 环境，验证资源映射和文件服务协作。</p></div></div>
+
+                <h3>好的回归测试来自真实 Bug</h3>
+                <p>这次图片不显示后，项目增加了 classpath 图片、运行时上传图片、CSS 背景图三条测试。以后有人改上传目录或 URL，只要行为被破坏，测试就会先报错。</p>
+
+                <div class="callout remember"><span class="callout-icon">★</span><div class="callout-content"><strong>面试表达</strong><p>“我为迁移中最容易回归的密码兼容和双来源媒体映射编写了测试。密码固定向量由独立实现生成，避免自己的生成逻辑和验证逻辑互相证明。”</p></div></div>
+
+                <h3>测试失败先看哪里？</h3>
+                <ol><li>先找控制台第一个 <code>Caused by</code>，不要只看最后的 BUILD FAILURE。</li><li>打开 <code>target/surefire-reports</code> 中对应报告。</li><li>确认失败是断言不符、应用无法启动，还是环境（JDK/端口/依赖）问题。</li><li>只修根因，不要为了变绿直接删除测试。</li></ol>
+            </article>
+
+            <article class="lesson" id="debug" data-lesson="debug" data-keywords="IDEA Debug 断点 Step Over Step Into Watch Variables Call Stack Evaluate">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 22 章</span><h2>用 IDEA 断点真正看懂代码</h2><p class="lesson-subtitle">调试不是只在出错时使用，它也是初学者最好的学习工具。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <h3>第一次断点：跟踪登录</h3>
+                <ol class="step-list">
+                    <li><strong>停止普通 Run</strong>避免 8080 端口被旧进程占用。</li>
+                    <li><strong>打开 AccountController</strong>在 POST 登录方法第一行左侧行号栏单击，出现红点。</li>
+                    <li><strong>再打开 UserService</strong>在 <code>authenticate</code> 第一行设置第二个断点。</li>
+                    <li><strong>以 Debug 启动主类</strong>点击甲虫图标，而不是绿色运行三角。</li>
+                    <li><strong>浏览器填写并提交登录</strong>IDEA 会在 Controller 断点暂停。</li>
+                    <li><strong>查看 Variables</strong>确认 <code>username</code>、<code>password</code>（只在本地练习看）、<code>session</code> 的值。</li>
+                    <li><strong>Step Into 进入 Service</strong>观察 Repository 查询结果和密码验证分支。</li>
+                    <li><strong>Resume 继续</strong>最后看 Session 出现 <code>loginUser</code>，浏览器收到重定向。</li>
+                </ol>
+
+                <h3>常用调试按钮</h3>
+                <div class="table-wrap"><table><thead><tr><th>IDEA 操作</th><th>快捷键（常见 Windows）</th><th>含义</th></tr></thead><tbody>
+                    <tr><td>Resume Program</td><td>F9</td><td>继续运行到下一个断点</td></tr>
+                    <tr><td>Step Over</td><td>F8</td><td>执行当前行，不进入被调用方法</td></tr>
+                    <tr><td>Step Into</td><td>F7</td><td>进入当前行调用的方法</td></tr>
+                    <tr><td>Step Out</td><td>Shift+F8</td><td>执行完当前方法，回到调用者</td></tr>
+                    <tr><td>Evaluate Expression</td><td>Alt+F8</td><td>暂停时临时计算表达式</td></tr>
+                </tbody></table></div>
+
+                <h3>四个调试窗口怎么看</h3>
+                <div class="cards">
+                    <div class="mini-card"><span class="badge">Variables</span><h4>当前变量</h4><p>展开对象看字段值，例如 <code>user.id</code>、<code>pageInfo.totalPages</code>。</p></div>
+                    <div class="mini-card"><span class="badge">Frames</span><h4>调用栈</h4><p>显示“谁调用了谁”，从 Controller 一路回看请求入口。</p></div>
+                    <div class="mini-card"><span class="badge">Watches</span><h4>持续观察</h4><p>添加想反复看的表达式，如 <code>session.getAttribute("loginUser")</code>。</p></div>
+                    <div class="mini-card"><span class="badge">Console</span><h4>日志与 SQL</h4><p>看应用启动、异常堆栈和 Hibernate 行为。</p></div>
+                </div>
+
+                <h3>推荐的 5 条断点路线</h3>
+                <div class="table-wrap"><table><thead><tr><th>目标</th><th>起点</th><th>继续跟踪</th><th>重点变量</th></tr></thead><tbody>
+                    <tr><td>登录</td><td>AccountController.login</td><td>UserService.authenticate</td><td>username、Optional、session</td></tr>
+                    <tr><td>文章分页</td><td>ArticleController.articleList</td><td>ArticleService.findPage</td><td>page、safePage、totalPages</td></tr>
+                    <tr><td>阅读量</td><td>ArticleController.detail</td><td>ArticleService.findDetail</td><td>readingKey、firstReading</td></tr>
+                    <tr><td>上传图片</td><td>AdminController 保存文章</td><td>FileStorageService.store</td><td>originalFilename、target、relativePath</td></tr>
+                    <tr><td>后台权限</td><td>AdminLoginInterceptor.preHandle</td><td>AdminService 查询方法</td><td>loginUser.id、数据 author.id</td></tr>
+                </tbody></table></div>
+
+                <div class="callout tip"><span class="callout-icon">i</span><div class="callout-content"><strong>不要在断点处修改真实数据库</strong><p>Evaluate Expression 可以执行方法。初学阶段只计算无副作用表达式，不要随意调用 <code>save</code>、<code>delete</code>。</p></div></div>
+            </article>
+
+            <article class="lesson" id="errors" data-lesson="errors" data-keywords="错误 排查 端口占用 数据库连接 404 图片 模板 JDK LazyInitializationException 白页 500">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 23 章</span><h2>常见错误排查手册</h2><p class="lesson-subtitle">先判断错误发生在哪一层，再动代码。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <details open><summary>1. 启动时报 Port 8080 was already in use</summary><div><p><strong>原因：</strong>另一个 Java 程序或上一次启动还占着 8080。</p><p><strong>处理：</strong>先在 IDEA 停止旧进程；不确定时查看运行窗口。临时测试可用 <code>--server.port=18080</code>，不要同时启动两份应用抢同一端口。</p></div></details>
+                <details><summary>2. Communications link failure / Access denied for user</summary><div><p><strong>层级：</strong>数据库连接。确认 MySQL 服务、3306 端口、<code>blogdb</code> 是否存在，再核对 <code>application.properties</code> 中 URL、用户名、密码。默认是 root/root，但环境变量可能覆盖。</p></div></details>
+                <details><summary>3. Table ... doesn't exist</summary><div><p><strong>原因：</strong>数据库未导入、连错库，或表名大小写不一致。先运行建库脚本，再导入完整 <code>database/blogdb.sql</code>；因为 <code>ddl-auto=none</code>，应用不会自动替你建旧表。</p></div></details>
+                <details><summary>4. 浏览器图片 404</summary><div><p>在开发者工具 Network 点开失败请求：如果是 <code>/media/**</code>，查数据库相对路径、<code>storage/media</code> 与 <code>static/media</code>；如果是 <code>/images/**</code>，查 <code>static/images</code> 和 CSS URL。不要再指向外层 Python 项目。</p></div></details>
+                <details><summary>5. 修改 HTML 后刷新没有变化</summary><div><p>确认改的是 <code>src/main/resources/templates</code>，而不是 <code>target/classes</code>；确认 Thymeleaf cache 为 false。IDEA 运行时必要时重新构建或重启。<code>target</code> 内容会被覆盖，永远不要在那里改源码。</p></div></details>
+                <details><summary>6. LazyInitializationException</summary><div><p>模板访问了没有在事务中加载的懒关联。不要简单把 <code>open-in-view</code> 打开来掩盖问题；在 Service 查询中用 <code>@EntityGraph</code> 或合适查询明确加载页面需要的数据。</p></div></details>
+                <details><summary>7. 表单明明填写了却提示校验错误</summary><div><p>检查 HTML <code>name</code>/<code>th:field</code> 是否与 Form 属性同名；检查 <code>BindingResult</code> 是否紧跟 <code>@Valid</code> 参数；在断点看 Form 字段实际值。</p></div></details>
+                <details><summary>8. Unsupported class file / release version 17 not supported</summary><div><p>IDEA Project SDK、Module SDK、Maven Runner JRE 可能不是同一版本。全部选择 JDK 17，然后重新加载 Maven。不要把只设置 Language Level 当成安装了 JDK。</p></div></details>
+                <details><summary>9. Whitelabel Error Page / 500</summary><div><p>浏览器只显示结果，真正原因在 IDEA 控制台。向上找到第一个由项目类引发的 <code>Caused by</code>，记录异常类型、文件和行号，再判断是空值、数据库、模板还是路径问题。</p></div></details>
+
+                <h3>通用五步排查法</h3>
+                <ol class="step-list"><li><strong>稳定复现</strong>记下 URL、操作、输入和准确时间。</li><li><strong>确定层级</strong>Network 是请求，Controller 是参数，Service 是业务，Repository 是数据库，模板是渲染。</li><li><strong>读第一条根因</strong>不要被几十行堆栈吓到，从第一个项目类和 <code>Caused by</code> 开始。</li><li><strong>用断点验证猜想</strong>不要只凭感觉大改代码。</li><li><strong>修复后加回归测试</strong>尤其是密码、权限、上传和数据删除。</li></ol>
+
+                <div class="callout remember"><span class="callout-icon">★</span><div class="callout-content"><strong>好的排错记录格式</strong><p>现象 → 复现步骤 → 根因 → 修复位置 → 验证方法。把“我重启就好了”变成可以解释的工程经验。</p></div></div>
+            </article>
+
+            <article class="lesson" id="interview" data-lesson="interview" data-keywords="面试 问答 项目亮点 设计选择 Spring Security MyBatis JPA 事务">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 24 章</span><h2>高频面试问答</h2><p class="lesson-subtitle">先理解再组织语言，不要背成统一答案。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <details class="interview-q" open><summary>请介绍一下这个项目。</summary><div><p>这是把一个 Django 个人博客等价迁移到 Java 17 和 Spring Boot 4.1 的服务端渲染项目。前台包含注册登录、文章分页、详情评论、相册、留言和个人资料；后台用基础 Spring MVC 自建文章、标签、评论、相册和留言 CRUD。数据层使用 Spring Data JPA 直接映射原 Django MySQL 表，并兼容旧 PBKDF2 密码和原媒体路径。</p></div></details>
+
+                <details class="interview-q"><summary>为什么使用 JPA，而不是 MyBatis 或 MyBatis-Plus？</summary><div><p>项目以实体关系和基础 CRUD 为主，JPA 的 Repository 方法名查询、分页和关联映射足够直接，也减少样板 SQL。选择目的是匹配业务和学习目标，不代表 JPA 在所有场景都优于 MyBatis；复杂报表或需要精细 SQL 控制时会重新评估。</p></div></details>
+
+                <details class="interview-q"><summary>为什么没有使用 Spring Security？</summary><div><p>为了保持迁移逻辑和初学者可读性，当前用 Session + HandlerInterceptor 实现基础后台认证，并在 Service 层做数据所有者隔离。我知道生产项目通常应使用 Spring Security 获得成熟的认证、授权、CSRF 和会话安全能力，这是后续可演进方向。</p></div></details>
+
+                <details class="interview-q"><summary>怎样防止用户修改 URL 操作别人的文章？</summary><div><p>不能只隐藏页面按钮。拦截器先检查后台登录身份，Service/Repository 再按“数据 ID + 当前用户 ID”查询，例如 <code>findByIdAndAuthorId</code>；找不到就拒绝。新增数据时作者也只从 Session 获取，不相信表单提交的用户 ID。</p></div></details>
+
+                <details class="interview-q"><summary>图片 Bug 的根因和修复是什么？</summary><div><p>Java 应用原先把默认上传路径指向外层 Python 项目，所以换工作目录或删除旧项目后 <code>/media/**</code> 找不到文件。修复时把旧媒体放进 Java classpath，把新上传写到项目内 <code>storage/media</code>，资源处理器依次查两个位置；数据库仍只存相对路径，并增加三条 HTTP 回归测试。</p></div></details>
+
+                <details class="interview-q"><summary>怎样兼容 Django 的旧密码？</summary><div><p>解析 Django 的 <code>pbkdf2_sha256$iterations$salt$hash</code> 格式，使用 Java 的 PBKDF2WithHmacSHA256 按每条记录的真实迭代次数重新计算，再固定时间比较。新注册也生成同格式哈希，因此原用户无需重置密码。</p></div></details>
+
+                <details class="interview-q"><summary>为什么 Service 需要事务？</summary><div><p>事务应该围绕一个完整业务动作。比如删除文章要先处理标签中间表和评论，再删除文章；其中任一步失败都不应留下半完成状态。阅读量更新和详情读取也由 Service 声明写事务。只读、单步且不需要事务上下文的方法不盲目添加。</p></div></details>
+
+                <details class="interview-q"><summary>如何避免重复提交评论？</summary><div><p>保存成功后返回 302 重定向到详情 GET，使用 POST-Redirect-GET。这样地址栏最终是 GET，刷新不会再次执行上一个 POST。更强的防重复可增加幂等 token，但当前项目需求下 PRG 已解决浏览器刷新问题。</p></div></details>
+
+                <details class="interview-q"><summary><code>th:text</code> 和 <code>th:utext</code> 有什么区别？</summary><div><p><code>th:text</code> 会转义 HTML，适合标题、评论等普通或不可信文本；<code>th:utext</code> 原样渲染 HTML，仅用于后台维护的 CKEditor 正文。对访客输入使用 <code>th:utext</code> 会产生 XSS 风险。</p></div></details>
+
+                <details class="interview-q"><summary>如果继续完善，你会做什么？</summary><div><p>按优先级：引入 Spring Security 和 CSRF；使用 Flyway 管理数据库版本；完善全局异常页面和表单 DTO；对富文本做白名单清洗；增加 Testcontainers/MySQL 集成测试；最后再考虑缓存、对象存储和部署。先补安全与可维护性，不急着堆高级框架。</p></div></details>
+
+                <div class="callout tip"><span class="callout-icon">i</span><div class="callout-content"><strong>回答结构</strong><p>先说结论，再说这个项目中的具体实现，最后主动说边界和演进方向。这样比只背定义更像真正做过项目。</p></div></div>
+            </article>
+
+            <article class="lesson" id="roadmap" data-lesson="roadmap" data-keywords="学习路线 14天 复习 计划 每日 Java Spring MVC JPA">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 25 章</span><h2>适合初学者的 14 天路线</h2><p class="lesson-subtitle">每天 1.5～2 小时，目标是能运行、能跟踪、能修改、能讲述。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <div class="timeline">
+                    <div class="timeline-item"><strong>第 1 天：跑通项目</strong>配置 JDK 17、MySQL 和 IDEA；访问所有公开页面；记录一个启动错误及解决过程。</div>
+                    <div class="timeline-item"><strong>第 2 天：目录与 Maven</strong>画出目录树；能解释 6 个主要依赖；运行 test、run、package 命令。</div>
+                    <div class="timeline-item"><strong>第 3 天：Controller</strong>逐个整理公开 URL，理解 GET、POST、PathVariable、Model 和 redirect。</div>
+                    <div class="timeline-item"><strong>第 4 天：Service</strong>跟踪登录和文章列表；能说出业务逻辑为什么不全写在 Controller。</div>
+                    <div class="timeline-item"><strong>第 5 天：Entity</strong>手画 6 张表和三条主要关系；对照注解找数据库列。</div>
+                    <div class="timeline-item"><strong>第 6 天：Repository</strong>把 5 个方法名翻译成中文和近似 SQL；理解 Optional、Pageable。</div>
+                    <div class="timeline-item"><strong>第 7 天：Thymeleaf</strong>修改一处标题；追踪一个 Model 属性从 Controller 到 HTML。</div>
+                    <div class="timeline-item"><strong>第 8 天：注册与评论</strong>故意触发校验错误；理解 BindingResult 和 PRG。</div>
+                    <div class="timeline-item"><strong>第 9 天：Session 与权限</strong>登录、退出、访问后台；用断点查看拦截器；尝试解释两层权限保护。</div>
+                    <div class="timeline-item"><strong>第 10 天：后台 CRUD</strong>用临时数据走一遍新增、修改、删除，观察数据库变化并清理临时内容。</div>
+                    <div class="timeline-item"><strong>第 11 天：图片链路</strong>上传一张测试图，跟踪 MultipartFile、磁盘路径、数据库相对路径和浏览器 URL。</div>
+                    <div class="timeline-item"><strong>第 12 天：密码与测试</strong>理解 salt/迭代/哈希；运行 7 项测试；故意改错图片 URL，看测试怎样失败，再恢复。</div>
+                    <div class="timeline-item"><strong>第 13 天：完成两个练习</strong>从下一章选一个入门和一个进阶任务，先写计划再改代码。</div>
+                    <div class="timeline-item"><strong>第 14 天：模拟面试</strong>不用文档讲 3 分钟项目；回答 10 个问题；录音后检查是否只讲技术名词、没有讲实现。</div>
+                </div>
+
+                <h3>每天结束时写三句话</h3>
+                <ul class="checklist"><li>今天我能解释的一个流程是什么？</li><li>今天仍然不懂的一个点是什么？</li><li>明天要用哪段源码或哪个断点验证它？</li></ul>
+            </article>
+
+            <article class="lesson" id="exercises" data-lesson="exercises" data-keywords="练习 作业 改功能 入门 进阶 挑战 验收">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 26 章</span><h2>动手练习与验收标准</h2><p class="lesson-subtitle">每次只改变一件事，改前先预测会经过哪些层。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <h3>入门：只改展示或简单校验</h3>
+                <details><summary>练习 A：修改博客页脚文字</summary><div><p><strong>目标：</strong>找到公共 Thymeleaf 片段，修改一次让多个公开页面同时变化。</p><p><strong>验收：</strong>文章、相册、留言页都显示新文字；没有逐页重复修改。</p></div></details>
+                <details><summary>练习 B：把留言姓名限制为最多 30 个字符</summary><div><p><strong>目标：</strong>在 <code>BoardForm</code> 添加/修改 <code>@Size</code>，提交过长姓名验证错误。</p><p><strong>验收：</strong>后端拒绝；页面显示中文提示；正常留言仍能保存。</p></div></details>
+                <details><summary>练习 C：给文章列表增加“暂无文章”提示</summary><div><p><strong>目标：</strong>使用 <code>th:if</code> 根据分页内容是否为空显示提示。</p><p><strong>验收：</strong>空列表显示提示，有文章时不显示。</p></div></details>
+
+                <h3>进阶：贯穿两到三层</h3>
+                <details><summary>练习 D：按标题关键字搜索自己的文章</summary><div><p><strong>路线：</strong>Controller 接收 <code>keyword</code> → Service 清理空格 → Repository 新增按 authorId 和 title containing 查询 → 模板增加搜索框并保留关键字。</p><p><strong>验收：</strong>不能搜到别人的文章；空关键字回到正常列表；结果仍能分页。</p></div></details>
+                <details><summary>练习 E：在后台显示文章评论数</summary><div><p><strong>路线：</strong>先思考用 Repository count 查询还是实体关系；避免列表每篇文章触发一次额外查询（N+1）。</p><p><strong>验收：</strong>计数准确；打开 SQL 日志检查查询数量不会随文章数线性爆炸。</p></div></details>
+                <details><summary>练习 F：为相册上传增加文件大小提示</summary><div><p><strong>路线：</strong>前端提示 + 后端 <code>MultipartFile.getSize()</code> 校验 + 友好错误消息。不能只靠浏览器。</p><p><strong>验收：</strong>过大文件不会写入磁盘，数据库也不会产生记录。</p></div></details>
+
+                <h3>挑战：需要设计与测试</h3>
+                <details><summary>练习 G：增加“文章草稿”字段</summary><div><p>需要修改数据库脚本/迁移、Entity、后台表单、Service 和公开查询。公开页面不能显示草稿，作者后台可以查看。至少为公开过滤写一条测试。</p></div></details>
+                <details><summary>练习 H：把简易登录演进为 Spring Security</summary><div><p>这是完成基础学习后的挑战，不建议现在马上做。先列出当前 Session、拦截器、is_staff、密码工具各自要映射到 Security 的哪个概念，再分步替换并保持旧密码兼容。</p></div></details>
+
+                <h3>每个练习都用这张检查表</h3>
+                <ul class="checklist"><li>修改前能说出要动哪些层，为什么。</li><li>没有在 Controller 直接写数据库细节。</li><li>浏览器输入有后端校验。</li><li>按当前登录用户隔离数据。</li><li>成功和失败路径都手动验证。</li><li>重要 Bug 或规则有自动化测试。</li><li>运行 <code>.\mvnw.cmd test</code> 仍全部通过。</li></ul>
+            </article>
+
+            <article class="lesson" id="glossary" data-lesson="glossary" data-keywords="术语 词典 Bean IoC DI MVC JPA ORM Hibernate DTO Session Cookie 事务">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 27 章</span><h2>项目术语词典</h2><p class="lesson-subtitle">忘了名词很正常，回到这里用项目例子重新建立联系。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+                <dl class="glossary">
+                    <div class="term"><dt>Bean</dt><dd>由 Spring 创建和管理的对象，如 <code>UserService</code>。</dd></div>
+                    <div class="term"><dt>IoC</dt><dd>对象创建控制权交给 Spring，而不是业务类到处 <code>new</code>。</dd></div>
+                    <div class="term"><dt>DI</dt><dd>依赖注入；Spring 通过构造器把 Service 交给 Controller。</dd></div>
+                    <div class="term"><dt>MVC</dt><dd>Model、View、Controller 的 Web 分工方式。</dd></div>
+                    <div class="term"><dt>Model</dt><dd>Controller 传给 Thymeleaf 的当前请求数据容器。</dd></div>
+                    <div class="term"><dt>Entity</dt><dd>映射数据库表的 Java 对象，如 <code>ArticleInfo</code>。</dd></div>
+                    <div class="term"><dt>DTO / Form</dt><dd>为输入输出定义的数据对象，不等于数据库实体。</dd></div>
+                    <div class="term"><dt>JPA</dt><dd>Java 持久化规范，定义实体映射和数据操作接口。</dd></div>
+                    <div class="term"><dt>Hibernate</dt><dd>本项目使用的 JPA 实现，把对象操作转换成 SQL。</dd></div>
+                    <div class="term"><dt>ORM</dt><dd>对象关系映射：Java 类/字段对应数据库表/列。</dd></div>
+                    <div class="term"><dt>Repository</dt><dd>数据访问层接口，负责查询、保存和删除。</dd></div>
+                    <div class="term"><dt>事务</dt><dd>一组数据库操作作为整体提交或回滚。</dd></div>
+                    <div class="term"><dt>Session</dt><dd>服务器端的会话状态，本项目保存 <code>loginUser</code>。</dd></div>
+                    <div class="term"><dt>Cookie</dt><dd>浏览器保存并随请求携带的小数据；会话 Cookie 关联 Session。</dd></div>
+                    <div class="term"><dt>Interceptor</dt><dd>Controller 前后的统一拦截逻辑，本项目用于后台认证。</dd></div>
+                    <div class="term"><dt>Validation</dt><dd>对表单数据执行声明式规则，如非空、长度和邮箱格式。</dd></div>
+                    <div class="term"><dt>PBKDF2</dt><dd>通过 salt 和多次迭代派生密码哈希的算法。</dd></div>
+                    <div class="term"><dt>Multipart</dt><dd>HTTP 表单传输文本字段和文件的编码方式。</dd></div>
+                    <div class="term"><dt>Classpath</dt><dd>Java 运行时查找类和打包资源的位置集合。</dd></div>
+                    <div class="term"><dt>回归测试</dt><dd>防止已经修好的行为在以后修改中再次损坏。</dd></div>
+                    <div class="term"><dt>PRG</dt><dd>POST 成功后 Redirect，再 GET 页面，避免刷新重复提交。</dd></div>
+                    <div class="term"><dt>XSS</dt><dd>把恶意脚本注入网页；输出转义和富文本清洗可降低风险。</dd></div>
+                    <div class="term"><dt>懒加载</dt><dd>关联数据等真正访问时才查询，离开事务后可能无法加载。</dd></div>
+                    <div class="term"><dt>HTTP 302</dt><dd>重定向响应，通知浏览器再次访问新的 URL。</dd></div>
+                </dl>
+            </article>
+
+            <article class="lesson" id="pitch" data-lesson="pitch" data-keywords="项目讲解稿 自我介绍 简历 3分钟 面试 演示">
+                <header class="lesson-header">
+                    <div><span class="lesson-number">第 28 章</span><h2>三分钟项目讲解稿</h2><p class="lesson-subtitle">把它改成自己的语言，配合真实页面和源码演示。</p></div>
+                    <button class="complete-button" type="button" aria-pressed="false">标记学完</button>
+                </header>
+
+                <div class="lead-box"><strong>不要逐字背诵。</strong>下面给的是结构。面试前应替换成你真正理解、亲自调试和修改过的内容；面试官继续追问时，能打开对应源码说明。</div>
+
+                <h3>0～30 秒：背景与目标</h3>
+                <p>“这个项目是一个个人博客。我把原来的 Python Django 版本迁移成了 Java 17 + Spring Boot 4.1，目标是在保留页面、功能和数据库内容的同时，用较基础、可解释的 Java 分层结构重新实现，并让 Java 项目可以独立运行。”</p>
+
+                <h3>30～90 秒：功能与结构</h3>
+                <p>“前台包括注册登录、文章分页、详情评论、相册、留言板和个人资料；后台可以维护用户资料、文章、分类、评论、相册和留言。项目采用 Spring MVC + Thymeleaf 服务端渲染，业务按 Controller、Service、Repository、Entity、View 分层；Spring Data JPA 直接映射原 Django 数据表，MySQL 保存业务数据，H2 只用于测试。”</p>
+
+                <h3>90～150 秒：两个有分量的实现点</h3>
+                <p>“第一是账号兼容。Django 密码是带 salt 和迭代次数的 PBKDF2-SHA256 格式，我在 Java 中解析每条旧哈希并重新计算比较，新注册账号也保存为兼容格式，因此旧用户无需重置密码。第二是图片问题。原迁移版还依赖外层 Python 媒体目录，我把旧媒体打进 Java classpath，把新上传写入项目内可写目录，<code>/media/**</code> 依次映射两个来源，数据库只存相对路径。”</p>
+
+                <h3>150～180 秒：权限、测试与反思</h3>
+                <p>“后台先由 Session 拦截器检查登录和 staff 状态，Service/Repository 再按当前用户 ID 限制每条数据，防止只修改 URL 就操作他人内容。项目有 7 项自动化测试，重点覆盖 Django 密码固定向量、内置图片、运行时上传图片和静态背景图。当前为了基础可读性没有引入 Spring Security；如果继续完善，我会优先补 Spring Security/CSRF、数据库迁移工具、富文本清洗和更完整的集成测试。”</p>
+
+                <h3>现场演示建议顺序</h3>
+                <ol class="step-list"><li><strong>先演示页面</strong>登录 → 文章 → 详情评论 → 后台编辑，不要一开始就让面试官看目录树。</li><li><strong>再打开一条代码链</strong>从 ArticleController 跟到 ArticleService 和 Repository。</li><li><strong>展示真实问题的修复</strong>打开 WebMvcConfig 和媒体测试，解释双来源映射。</li><li><strong>最后运行测试</strong>让结果证明关键行为可重复验证。</li></ol>
+
+                <h3>你必须能继续回答的追问</h3>
+                <ul class="checklist"><li>为什么选择服务端渲染？</li><li>Session 和 Cookie 的关系是什么？</li><li>为什么按 ID + 用户 ID 查询能增强权限？</li><li>事务在删除文章时保护什么？</li><li>JPA 方法名怎样生成查询？</li><li>为什么新上传文件不能写进 JAR？</li><li>PBKDF2 的 salt 和迭代次数有什么作用？</li><li>图片测试为什么属于集成测试？</li></ul>
+
+                <div class="quiz"><strong>最终验收</strong>关闭这份网页，用 3 分钟讲完整项目；然后随机打开一个 Controller 方法，画出数据流并指出每个参数从哪里来。能做到这两点，你就不再只是“运行过项目”。</div>
+            </article>
+        </div>
+    </div>
+</main>
+
+<button class="back-to-top" id="back-to-top" type="button" aria-label="回到顶部">↑</button>
+<footer class="footer">myblog Spring Boot 离线学习中心 · 所有代码路径均指向当前 Java 项目 · 学习进度仅保存在本机浏览器</footer>
+<noscript><div class="callout warn" style="margin:20px">JavaScript 未启用：正文仍可正常阅读，但搜索、主题切换、复制和进度记录不可用。</div></noscript>
+</body>
+</html>

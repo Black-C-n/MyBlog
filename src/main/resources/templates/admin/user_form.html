@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/fragments :: head(${title})}"></head>
+<body class="change-form"><div id="container"><div th:replace="~{admin/fragments :: header}"></div><div th:replace="~{admin/fragments :: breadcrumbs('修改用户')}"></div><div th:replace="~{admin/fragments :: navigation}"></div>
+<main class="content"><div id="content"><h1 th:text="${title}">修改用户</h1><div id="content-main"><form method="post" enctype="multipart/form-data"><div><fieldset class="module aligned wide">
+<h2>账户信息</h2>
+<div class="form-row required"><div><label for="username">用户名:</label><input id="username" name="username" class="vTextField" maxlength="150" required th:value="${item.username}"></div></div>
+<div class="form-row"><div><label for="newPassword">新密码:</label><input id="newPassword" name="newPassword" type="password" class="vTextField"><div class="help">留空表示不修改密码。</div></div></div>
+<h2>个人信息</h2>
+<div class="form-row"><div><label for="name">姓名:</label><input id="name" name="name" class="vTextField" maxlength="50" th:value="${item.name}"></div></div>
+<div class="form-row"><div><label for="email">电子邮件地址:</label><input id="email" name="email" type="email" class="vTextField" th:value="${item.email}"></div></div>
+<div class="form-row"><div><label for="introduce">简介:</label><textarea id="introduce" name="introduce" rows="5" cols="40" th:text="${item.introduce}"></textarea></div></div>
+<div class="form-row"><div><label for="company">公司:</label><input id="company" name="company" class="vTextField" th:value="${item.company}"></div></div>
+<div class="form-row"><div><label for="profession">职业:</label><input id="profession" name="profession" class="vTextField" th:value="${item.profession}"></div></div>
+<div class="form-row"><div><label for="address">住址:</label><input id="address" name="address" class="vTextField" th:value="${item.address}"></div></div>
+<div class="form-row"><div><label for="telephone">电话:</label><input id="telephone" name="telephone" class="vTextField" maxlength="11" th:value="${item.telephone}"></div></div>
+<div class="form-row"><div><label for="wx">微信:</label><input id="wx" name="wx" class="vTextField" th:value="${item.wx}"></div></div>
+<div class="form-row"><div><label for="qq">QQ:</label><input id="qq" name="qq" class="vTextField" th:value="${item.qq}"></div></div>
+<div class="form-row"><div><label for="wb">微博:</label><input id="wb" name="wb" class="vTextField" th:value="${item.wb}"></div></div>
+<div class="form-row"><div><label for="photoFile">头像:</label><a th:if="${item.photo != null and !item.photo.isBlank()}" th:href="@{/media/{path}(path=${item.photo})}" th:text="${item.photo}"></a><br><input id="photoFile" name="photoFile" type="file" accept="image/*"></div></div>
+</fieldset><div class="submit-row"><input type="submit" value="保存" class="default" name="_save"></div></div></form></div></div></main></div></body></html>

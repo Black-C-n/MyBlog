@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/fragments :: head(${title})}"></head>
+<body class="dashboard">
+<div id="container">
+    <div th:replace="~{admin/fragments :: header}"></div>
+    <div th:replace="~{admin/fragments :: breadcrumbs('')}"></div>
+    <div th:replace="~{admin/fragments :: navigation}"></div>
+    <main id="content-start" class="content" tabindex="-1">
+        <div id="content" class="colMS">
+            <h1>网站管理</h1>
+            <div id="content-main">
+                <div class="app-account module">
+                    <table><caption>用户管理</caption><tbody><tr class="model-myuser">
+                        <th scope="row"><a href="/admin/account/myuser/">用户</a></th>
+                        <td><a href="/admin/account/myuser/" class="changelink">修改</a></td>
+                    </tr></tbody></table>
+                </div>
+                <div class="app-article module">
+                    <table><caption>文章管理</caption><tbody>
+                    <tr><th><a href="/admin/article/articleinfo/">博文管理</a></th><td><a href="/admin/article/articleinfo/add/" class="addlink">增加</a></td><td><a href="/admin/article/articleinfo/" class="changelink">修改</a></td></tr>
+                    <tr><th><a href="/admin/article/articletag/">博文分类</a></th><td><a href="/admin/article/articletag/add/" class="addlink">增加</a></td><td><a href="/admin/article/articletag/" class="changelink">修改</a></td></tr>
+                    <tr><th><a href="/admin/article/comment/">评论管理</a></th><td><a href="/admin/article/comment/add/" class="addlink">增加</a></td><td><a href="/admin/article/comment/" class="changelink">修改</a></td></tr>
+                    </tbody></table>
+                </div>
+                <div class="app-album module">
+                    <table><caption>图片墙管理</caption><tbody><tr>
+                        <th><a href="/admin/album/albuminfo/">图片墙管理</a></th><td><a href="/admin/album/albuminfo/add/" class="addlink">增加</a></td><td><a href="/admin/album/albuminfo/" class="changelink">修改</a></td>
+                    </tr></tbody></table>
+                </div>
+                <div class="app-interflow module">
+                    <table><caption>留言管理</caption><tbody><tr>
+                        <th><a href="/admin/interflow/board/">博客留言</a></th><td><a href="/admin/interflow/board/add/" class="addlink">增加</a></td><td><a href="/admin/interflow/board/" class="changelink">修改</a></td>
+                    </tr></tbody></table>
+                </div>
+                <div class="dashboard-cards">
+                    <div class="dashboard-card">博文数量<strong th:text="${articleCount}">0</strong></div>
+                    <div class="dashboard-card">相册图片<strong th:text="${albumCount}">0</strong></div>
+                    <div class="dashboard-card">文章分类<strong th:text="${tagCount}">0</strong></div>
+                    <div class="dashboard-card">文章评论<strong th:text="${commentCount}">0</strong></div>
+                    <div class="dashboard-card">博客留言<strong th:text="${boardCount}">0</strong></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

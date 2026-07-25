@@ -1,0 +1,11 @@
+.admin-navigation { padding: 10px 40px; background: #f8f8f8; border-bottom: 1px solid #ddd; }
+.admin-navigation a { margin-right: 18px; font-weight: 600; }
+.messagelist { margin: 0 0 15px; padding: 0; }
+.messagelist li { background: #dfd url('../img/icon-yes.svg') 12px 12px no-repeat; color: #333; padding: 10px 10px 10px 40px; list-style: none; }
+.inline-delete { display: inline; }
+.inline-delete button { border: 0; cursor: pointer; }
+.preview-image { max-width: 180px; max-height: 100px; object-fit: cover; }
+.dashboard-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 20px; }
+.dashboard-card { padding: 20px; background: #fff; border: 1px solid #e8e8e8; border-left: 4px solid #417690; }
+.dashboard-card strong { display: block; font-size: 28px; color: #417690; margin-top: 8px; }
+.required label::after { content: ' *'; color: #ba2121; }

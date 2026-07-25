@@ -1,0 +1,6 @@
+<!DOCTYPE html><html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{admin/fragments :: head(${title})}"></head><body class="change-form"><div id="container">
+<div th:replace="~{admin/fragments :: header}"></div><div th:replace="~{admin/fragments :: breadcrumbs('博客留言')}"></div><div th:replace="~{admin/fragments :: navigation}"></div><main class="content"><div id="content"><h1 th:text="${title}"></h1><div id="content-main"><form method="post"><fieldset class="module aligned wide">
+<div class="form-row required"><div><label for="name">留言用户:</label><input id="name" name="name" class="vTextField" maxlength="50" required th:value="${item.name}"></div></div>
+<div class="form-row"><div><label for="email">邮箱地址:</label><input id="email" name="email" type="email" class="vTextField" maxlength="50" th:value="${item.email}"></div></div>
+<div class="form-row required"><div><label for="content">留言内容:</label><textarea id="content" name="content" rows="8" cols="60" maxlength="500" required th:text="${item.content}"></textarea></div></div>
+</fieldset><div class="submit-row"><input type="submit" value="保存" class="default"></div></form></div></div></main></div></body></html>

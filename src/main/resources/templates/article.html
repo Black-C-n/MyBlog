@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: head('我的博客')}"></head>
+<body>
+<header th:replace="~{fragments/common :: header(${id})}"></header>
+<article>
+    <aside th:replace="~{fragments/common :: sidebar(${user}, ${album}, ${tags})}"></aside>
+    <main class="r_box">
+        <li th:each="item : ${pageInfo.content}">
+            <i><a th:href="@{/detail/{id}/{articleId}.html(id=${id},articleId=${item.id})}">
+                <img th:if="${item.articlePhoto != null and !item.articlePhoto.isBlank()}"
+                     th:src="@{/media/{path}(path=${item.articlePhoto})}" alt="文章图片">
+                <img th:unless="${item.articlePhoto != null and !item.articlePhoto.isBlank()}"
+                     src="/images/pic.png" alt="默认文章图片">
+            </a></i>
+            <h3><a th:href="@{/detail/{id}/{articleId}.html(id=${id},articleId=${item.id})}"
+                   th:text="${item.title}">文章标题</a></h3>
+            <p th:utext="${item.content}">文章内容</p>
+        </li>
+        <div class="pagelist" th:if="${pageInfo.totalPages > 0}">
+            <a th:if="${pageInfo.hasPrevious()}"
+               th:href="@{/{id}/{page}.html(id=${id},page=${pageInfo.number})}">上一页</a>
+            <th:block th:each="pageNumber : ${#numbers.sequence(1, pageInfo.totalPages)}">
+                <a th:if="${pageNumber == pageInfo.number + 1}" href="javascript:;"
+                   class="curPage" th:text="${pageNumber}">1</a>
+                <a th:unless="${pageNumber == pageInfo.number + 1}"
+                   th:href="@{/{id}/{page}.html(id=${id},page=${pageNumber})}"
+                   th:text="${pageNumber}">1</a>
+            </th:block>
+            <a th:if="${pageInfo.hasNext()}"
+               th:href="@{/{id}/{page}.html(id=${id},page=${pageInfo.number + 2})}">下一页</a>
+        </div>
+    </main>
+</article>
+<a href="#" class="cd-top">Top</a>
+</body>
+</html>

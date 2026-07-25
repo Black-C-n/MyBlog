@@ -1,0 +1,6 @@
+<!DOCTYPE html><html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{admin/fragments :: head(${title})}"></head><body class="change-form"><div id="container">
+<div th:replace="~{admin/fragments :: header}"></div><div th:replace="~{admin/fragments :: breadcrumbs('评论管理')}"></div><div th:replace="~{admin/fragments :: navigation}"></div><main class="content"><div id="content"><h1 th:text="${title}"></h1><div id="content-main"><form method="post"><fieldset class="module aligned wide">
+<div class="form-row required"><div><label for="articleId">所属文章:</label><select id="articleId" name="articleId" required><option th:each="article : ${articles}" th:value="${article.id}" th:text="${article.title}" th:selected="${item.article != null and item.article.id == article.id}"></option></select></div></div>
+<div class="form-row required"><div><label for="commentator">评论用户:</label><input id="commentator" name="commentator" class="vTextField" maxlength="90" required th:value="${item.commentator}"></div></div>
+<div class="form-row required"><div><label for="content">评论内容:</label><textarea id="content" name="content" rows="8" cols="60" required th:text="${item.content}"></textarea></div></div>
+</fieldset><div class="submit-row"><input type="submit" value="保存" class="default"></div></form></div></div></main></div></body></html>

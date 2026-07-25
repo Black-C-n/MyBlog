@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: head('留言')}"></head>
+<body>
+<header th:replace="~{fragments/common :: header(${id})}"></header>
+<article>
+    <aside th:replace="~{fragments/common :: sidebar(${user}, ${album}, ${tags})}"></aside>
+    <main class="r_box">
+        <div class="gbook">
+            <div class="fb" th:each="item : ${pageInfo.content}">
+                <ul style="background:url('/images/user.jpg') no-repeat top 20px left 10px">
+                    <p class="fbtime"><span th:text="${#temporals.format(item.created, 'yyyy-MM-dd')}">日期</span>
+                        <span th:text="${item.name}">留言用户</span></p>
+                    <p class="fbinfo" th:text="${item.content}">留言内容</p>
+                </ul>
+            </div>
+            <div class="pagelist" th:if="${pageInfo.totalPages > 0}">
+                <a th:if="${pageInfo.hasPrevious()}"
+                   th:href="@{/board/{id}/{page}.html(id=${id},page=${pageInfo.number})}">上一页</a>
+                <th:block th:each="pageNumber : ${#numbers.sequence(1, pageInfo.totalPages)}">
+                    <a th:if="${pageNumber == pageInfo.number + 1}" href="javascript:;"
+                       class="curPage" th:text="${pageNumber}">1</a>
+                    <a th:unless="${pageNumber == pageInfo.number + 1}"
+                       th:href="@{/board/{id}/{page}.html(id=${id},page=${pageNumber})}"
+                       th:text="${pageNumber}">1</a>
+                </th:block>
+                <a th:if="${pageInfo.hasNext()}"
+                   th:href="@{/board/{id}/{page}.html(id=${id},page=${pageInfo.number + 2})}">下一页</a>
+            </div>
+            <hr>
+            <div class="gbox">
+                <form method="post" th:object="${boardForm}" name="saypl"
+                      onsubmit="return CheckPl(document.saypl)">
+                    <p><strong>来说点儿什么吧...</strong></p>
+                    <p><span>您的姓名:</span><input th:field="*{name}" type="text" id="name"> *</p>
+                    <p><span>联系邮箱:</span><input th:field="*{email}" type="text" id="email"> *</p>
+                    <p><span class="tnr">留言内容:</span>
+                        <textarea th:field="*{content}" cols="60" rows="12" id="lytext"></textarea>
+                    </p>
+                    <div th:if="${tips}" th:text="${tips}" style="color:#ba2121"></div>
+                    <p><input type="submit" name="Submit3" value="提交"></p>
+                </form>
+            </div>
+        </div>
+    </main>
+</article>
+<a href="#" class="cd-top">Top</a>
+<script>
+    function CheckPl(obj) {
+        if (obj.lytext.value === "") { alert("请写下您想说的话！"); obj.lytext.focus(); return false; }
+        if (obj.name.value === "") { alert("请写下您的名字！"); obj.name.focus(); return false; }
+        if (obj.email.value === "") { alert("请写下您的邮箱地址！"); obj.email.focus(); return false; }
+        return true;
+    }
+</script>
+</body>
+</html>

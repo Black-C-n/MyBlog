@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: head('关于我')}"></head>
+<body>
+<header th:replace="~{fragments/common :: header(${id})}"></header>
+<article>
+    <aside th:replace="~{fragments/common :: sidebar(${user}, ${album}, ${tags})}"></aside>
+    <main class="r_box">
+        <div class="about">
+            <div th:text="${user.introduce}">暂无介绍</div>
+            <br><hr><br>
+            <h2>我的资料</h2>
+            <br>
+            <p>名 字：<span th:text="${user.name}">匿名用户</span></p><br>
+            <p>微 博：<span th:text="${user.wb}">暂无信息</span></p><br>
+            <p>微 信：<span th:text="${user.wx}">暂无信息</span></p><br>
+            <p>Q Q：<span th:text="${user.qq}">暂无信息</span></p>
+        </div>
+    </main>
+</article>
+<a href="#" class="cd-top">Top</a>
+</body>
+</html>

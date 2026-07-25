@@ -85,7 +85,7 @@ public class AccountController {
         }
         return userService.authenticate(username, password)
                 .map(user -> {
-                    session.setAttribute("currentUser", user);
+                    session.setAttribute(AdminLoginInterceptor.LOGIN_USER, user);
                     return "redirect:/" + user.getId() + "/1.html";
                 })
                 .orElseGet(() -> {

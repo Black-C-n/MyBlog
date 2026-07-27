@@ -39,7 +39,7 @@ public class ArticleController {
             return "redirect:/user/register.html";
         }
         blogViewService.addCommonData(model, id);
-        Page<ArticleInfo> pageInfo = articleService.findPage(page, id);
+        Page<ArticleInfo> pageInfo = articleService.findPage(id, page);
         model.addAttribute("pageInfo", pageInfo);
         return "article";
     }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ArticleController {
@@ -34,12 +35,14 @@ public class ArticleController {
     @GetMapping("/{id}/{page}.html")
     public String articleList(@PathVariable Integer id,
                               @PathVariable int page,
+                              @RequestParam(name = "keyword", defaultValue = "") String keyword,
                               Model model) {
         if (userService.findById(id).isEmpty()) {
             return "redirect:/user/register.html";
         }
         blogViewService.addCommonData(model, id);
-        Page<ArticleInfo> pageInfo = articleService.findPage(id, page);
+        model.addAttribute("keyword", keyword);
+        Page<ArticleInfo> pageInfo = articleService.findPage(id, page, keyword);
         model.addAttribute("pageInfo", pageInfo);
         return "article";
     }

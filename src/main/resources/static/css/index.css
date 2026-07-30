@@ -1,12 +1,20 @@
  @charset "gb2312";
-.l_box h2 { color: #333; font-size: 14px; line-height: 30px; padding-left: 20px; background: #fff }
-.l_box div { background: rgba(255,255,255,0.5); margin-bottom: 20px; overflow: hidden }
-.l_box div ul { padding: 10px; overflow: hidden }
-.about_me img { width: 100%;height: 100% }
+@media screen and (min-width: 1200px) {
+    article, .container, nav { width: 92%; max-width: 1440px; }
+    article > aside { width: 27%; }
+    article > main { width: 71%; }
+}
+.l_box h2 { color: #333; font-size: 16px; line-height: 30px; padding: 0 2px 9px; background: transparent }
+.l_box div { background: rgba(255,255,255,0.86); border: 1px solid #f0edef; border-radius: 10px; box-shadow: 0 3px 12px rgba(45,35,40,0.04); margin-bottom: 16px; overflow: hidden; padding: 12px 14px }
+.l_box div ul { padding: 6px 2px 2px; overflow: hidden }
+.about_me img { width: 100%; height: 100%; object-fit: cover }
 .about_me p { line-height: 24px; font-size: 14px }
-.about_me i { width: 90px; float: left; clear: left; margin-right: 10px; height: 90px; overflow: hidden }
-.wdxc li { width: 32%; overflow: hidden; float: left; height: 80px; margin-bottom: 2px; margin-right: 2px }
-.wdxc li img {width: 100%; height:100%; -webkit-transition: all 0.5s; -moz-transition: all 0.5s; transition: all 0.5s; }
+.about_me i { width: 90px; float: left; clear: left; margin-right: 10px; height: 90px; overflow: hidden; border-radius: 8px }
+.wdxc ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px }
+.wdxc li.album-item { aspect-ratio: 1 / 1; background: #f6f3f4; border-radius: 8px; overflow: hidden }
+.wdxc li.album-item a { display: block; width: 100%; height: 100% }
+.wdxc li.album-item img { display: block; width: 100%; height: 100%; margin: 0; object-fit: cover; -webkit-transition: all 0.35s; -moz-transition: all 0.35s; transition: all 0.35s; }
+.wdxc li.album-empty { color: #999; grid-column: 1 / -1; padding: 8px 0 }
 .wdxc li img:hover { transform: scale(1.05) }
 .fenlei li { margin-bottom: 10px; margin-left: 10px }
 .tuijian li { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-bottom: 5px; background: url(../images/li.png) left center no-repeat; padding-left: 20px }
@@ -15,15 +23,27 @@
 .l_box .search { border: 1px solid #000; background: #000; border-radius: 0 5px 5px 0; position: relative; }
 .search input.input_submit { border: 0; background: 0; color: #fff; outline: none; position: absolute; top: 10px; right: 8% }
 .search input.input_text { border: 0; line-height: 36px; height: 36px; width: 72%; padding-left: 10px; outline: none }
-.r_box li { background: rgba(255,255,255,0.8); padding: 15px; overflow: hidden; color: #797b7c; margin-bottom: 20px }
+.r_box li { background: rgba(255,255,255,0.94); border: 1px solid #f0edef; border-radius: 10px; box-shadow: 0 3px 14px rgba(45,35,40,0.05); padding: 20px; overflow: hidden; color: #797b7c; margin-bottom: 16px; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s }
 .r_box li h3 { font-size: 16px; line-height: 25px; text-shadow: #FFF 1px 1px 1px }
 .r_box li h3 a { color: #222 }
 .r_box li h3 a:hover { color: #000; text-decoration: underline }
-.r_box li img { float: right; clear: right; width: 100%;height:100%; -webkit-transition: all 0.5s; -moz-transition: all 0.5s; transition: all 0.5s; }
-.r_box li i { width: 150px; display: block; max-height: 100px; overflow: hidden; float: right; margin-left: 20px }
+.r_box li img { float: right; clear: right; width: 100%; height: 100%; margin: 0; object-fit: contain; -webkit-transition: all 0.35s; -moz-transition: all 0.35s; transition: all 0.35s; }
+.r_box li i { width: 170px; height: 108px; display: block; overflow: hidden; float: right; margin-left: 24px; border-radius: 8px; background: #f6f3f4 }
 .r_box li p { margin: 20px 0 0 0; line-height: 22px; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; }
+.r_box li:hover { border-color: rgba(254,67,101,0.28); box-shadow: 0 7px 20px rgba(45,35,40,0.09); transform: translateY(-2px) }
 .r_box li:hover img { transform: scale(1.05) }
-.r_box li:hover h3 a { color: #19585d; }
+.r_box li:hover h3 a { color: #fe4365; }
+.article-search { background: #fff8fa; border: 1px solid #f6d8df; border-left: 4px solid #fe4365; border-radius: 10px; box-shadow: 0 3px 14px rgba(45,35,40,0.04); box-sizing: border-box; margin-bottom: 18px; padding: 16px 18px; }
+.article-search label { color: #333; display: block; font-size: 16px; font-weight: bold; margin-bottom: 10px; }
+.article-search-row { display: flex; gap: 8px; width: 100%; }
+.article-search-input { background: #fff; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; flex: 1; height: 38px; min-width: 0; outline: none; padding: 0 12px; transition: border-color 0.2s, box-shadow 0.2s; }
+.article-search-input:focus { border-color: #fe4365; box-shadow: 0 0 0 3px rgba(254,67,101,0.12); }
+.article-search-button { background: #fe4365; border: 0; border-radius: 5px; color: #fff; cursor: pointer; height: 38px; padding: 0 20px; transition: background 0.2s; }
+.article-search-button:hover { background: #e83d5e; }
+.article-search-clear { color: #777; line-height: 38px; padding: 0 4px; white-space: nowrap; }
+.article-search-clear:hover { color: #fe4365; }
+.article-search-result { color: #666; font-size: 13px; margin-top: 10px; }
+.article-search-result-empty { color: #a04a5a; }
 .pagelist { text-align: center; color: #666; width: 100%; clear: both; margin: 20px 0; padding-top: 20px }
 .pagelist a { color: #666; margin: 0 2px 5px 2px; display: inline-block; border: 1px solid #fff; padding: 5px 10px; background: #FFF }
 .pagelist a:hover { color: #19585d; }

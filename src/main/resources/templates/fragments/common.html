@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${titleText}">我的博客</title>
     <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/index.css?v=20260730-4" rel="stylesheet">
     <link href="/css/m.css" rel="stylesheet">
     <link href="/css/info.css" rel="stylesheet">
     <script src="/js/jquery.min.js"></script>
@@ -44,10 +44,10 @@
     <div class="wdxc">
         <h2>我的相册</h2>
         <ul>
-            <li th:each="item : ${albums}">
+            <li class="album-item" th:each="item : ${albums}">
                 <a href="javascript:;"><img th:src="@{/media/{path}(path=${item.photo})}" alt="相册图片"></a>
             </li>
-            <li th:if="${#lists.isEmpty(albums)}">暂无相册图片</li>
+            <li class="album-empty" th:if="${#lists.isEmpty(albums)}">暂无相册图片</li>
         </ul>
     </div>
     <div class="fenlei">

@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public interface ArticleInfoRepository extends JpaRepository<ArticleInfo, Integer> {
 
-    Page<ArticleInfo> findByAuthorIdOrderByCreatedDesc(Integer authorId, Pageable pageable);
+    Page<ArticleInfo> findByAuthorIdAndTitleContainingIgnoreCaseOrderByCreatedDesc(Integer authorId, String keyword, Pageable pageable);
 
     List<ArticleInfo> findByAuthorIdOrderByCreatedDesc(Integer authorId);
 

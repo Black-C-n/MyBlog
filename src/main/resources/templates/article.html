@@ -6,6 +6,33 @@
 <article>
     <aside th:replace="~{fragments/common :: sidebar(${user}, ${album}, ${tags})}"></aside>
     <main class="r_box">
+        <section class="article-search" aria-label="文章搜索">
+            <form th:action="@{/{id}/1.html(id=${id})}" method="get">
+                <label for="article-keyword">搜索文章</label>
+                <div class="article-search-row">
+                    <input id="article-keyword"
+                           class="article-search-input"
+                           type="search"
+                           name="keyword"
+                           th:value="${keyword}"
+                           placeholder="输入文章标题">
+                    <button class="article-search-button" type="submit">搜索</button>
+                    <a class="article-search-clear"
+                       th:if="${keyword != null and !keyword.isBlank()}"
+                       th:href="@{/{id}/1.html(id=${id})}">清除</a>
+                </div>
+            </form>
+            <p class="article-search-result"
+               th:if="${keyword != null and !keyword.isBlank() and !pageInfo.empty}"
+               th:text="|找到 ${pageInfo.totalElements} 篇标题中包含“${keyword}”的文章|">
+                搜索结果
+            </p>
+            <p class="article-search-result article-search-result-empty"
+               th:if="${keyword != null and !keyword.isBlank() and pageInfo.empty}"
+               th:text="|没有找到标题中包含“${keyword}”的文章|">
+                没有找到相关文章
+            </p>
+        </section>
         <li th:each="item : ${pageInfo.content}">
             <i><a th:href="@{/detail/{id}/{articleId}.html(id=${id},articleId=${item.id})}">
                 <img th:if="${item.articlePhoto != null and !item.articlePhoto.isBlank()}"
@@ -19,16 +46,16 @@
         </li>
         <div class="pagelist" th:if="${pageInfo.totalPages > 0}">
             <a th:if="${pageInfo.hasPrevious()}"
-               th:href="@{/{id}/{page}.html(id=${id},page=${pageInfo.number})}">上一页</a>
+               th:href="@{/{id}/{page}.html(id=${id},page=${pageInfo.number},keyword=${keyword})}">上一页</a>
             <th:block th:each="pageNumber : ${#numbers.sequence(1, pageInfo.totalPages)}">
                 <a th:if="${pageNumber == pageInfo.number + 1}" href="javascript:;"
                    class="curPage" th:text="${pageNumber}">1</a>
                 <a th:unless="${pageNumber == pageInfo.number + 1}"
-                   th:href="@{/{id}/{page}.html(id=${id},page=${pageNumber})}"
+                   th:href="@{/{id}/{page}.html(id=${id},page=${pageNumber},keyword=${keyword})}"
                    th:text="${pageNumber}">1</a>
             </th:block>
             <a th:if="${pageInfo.hasNext()}"
-               th:href="@{/{id}/{page}.html(id=${id},page=${pageInfo.number + 2})}">下一页</a>
+               th:href="@{/{id}/{page}.html(id=${id},page=${pageInfo.number + 2},keyword=${keyword})}">下一页</a>
         </div>
     </main>
 </article>

@@ -15,7 +15,6 @@ import java.util.List;
 
 @Service
 public class ArticleService {
-
     private final ArticleInfoRepository articleRepository;
     private final CommentRepository commentRepository;
 
@@ -25,12 +24,16 @@ public class ArticleService {
         this.commentRepository = commentRepository;
     }
 
-    public Page<ArticleInfo> findPage(Integer userId, int pageNumber) {
+    public Page<ArticleInfo> findPage(Integer userId, int pageNumber, String keyword) {
         int safePage = Math.max(1, pageNumber) - 1;
-        Page<ArticleInfo> page = articleRepository.findByAuthorIdOrderByCreatedDesc(userId,
+        Page<ArticleInfo> page = articleRepository.findByAuthorIdAndTitleContainingIgnoreCaseOrderByCreatedDesc(
+                userId,
+                keyword,
                 PageRequest.of(safePage, 10, Sort.by(Sort.Direction.DESC, "created")));
         if (page.getTotalPages() > 0 && safePage >= page.getTotalPages()) {
-            page = articleRepository.findByAuthorIdOrderByCreatedDesc(userId,
+            page = articleRepository.findByAuthorIdAndTitleContainingIgnoreCaseOrderByCreatedDesc(
+                    userId,
+                    keyword,
                     PageRequest.of(page.getTotalPages() - 1, 10,
                             Sort.by(Sort.Direction.DESC, "created")));
         }

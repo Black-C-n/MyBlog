@@ -26,14 +26,15 @@ public class ArticleService {
 
     public Page<ArticleInfo> findPage(Integer userId, int pageNumber, String keyword) {
         int safePage = Math.max(1, pageNumber) - 1;
+        String normalizedKeyword = keyword.trim();
         Page<ArticleInfo> page = articleRepository.findByAuthorIdAndTitleContainingIgnoreCaseOrderByCreatedDesc(
                 userId,
-                keyword,
+                normalizedKeyword,
                 PageRequest.of(safePage, 10, Sort.by(Sort.Direction.DESC, "created")));
         if (page.getTotalPages() > 0 && safePage >= page.getTotalPages()) {
             page = articleRepository.findByAuthorIdAndTitleContainingIgnoreCaseOrderByCreatedDesc(
                     userId,
-                    keyword,
+                    normalizedKeyword,
                     PageRequest.of(page.getTotalPages() - 1, 10,
                             Sort.by(Sort.Direction.DESC, "created")));
         }
